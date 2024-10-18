@@ -32,15 +32,25 @@ export const Sacer = () => {
           <directionalLight position={[0, -1, 0]} args={["white", 2]} />
           <Suspense fallback={<Trigger setLoading={setLoading} />}>
             <group>
-              <Gltf src={sacerModel} />
+              <Gltf src={sacerModel} scale={3.2} />
             </group>
           </Suspense>
         </Canvas>
       </View>
 
       <View style={styles.textContainer}>
-        <Text style={styles.textTitle}>Hello, worldddd!</Text>
-        <Text style={styles.text}>This is a 3D model</Text>
+        <Text style={styles.textTitle}>La Alta Sacerdotisa</Text>
+        <Text style={styles.text}>
+          Imagina a la Alta Sacerdotisa como la guardiana del Wi-Fi cósmico, la
+          que tiene todas las contraseñas secretas del universo pero no te las
+          va a dar… a menos que te lo ganes. Sentada en su trono de "yo lo sé
+          todo", está rodeada de misterios, libros y lunas, porque, claro, ella
+          es la reina del drama astrológico. Su especialidad es hacerte sentir
+          que tu intuición es un súper poder y que lo más cool del mundo es no
+          contarle nada a nadie. ¿Sabes ese momento en el que algo te dice que
+          debes seguir tu instinto? Bueno, es ella mandándote un WhatsApp mental
+          desde el más allá.
+        </Text>
       </View>
     </SafeAreaView>
   );
@@ -54,6 +64,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter-Bold",
     fontSize: 24,
     color: "white",
+    textAlign: "center",
   },
   button: {
     backgroundColor: "white",
@@ -74,8 +85,10 @@ const styles = StyleSheet.create({
   textContainer: {
     gap: 4,
     marginVertical: 20,
+    paddingHorizontal: 27,
   },
   text: {
+    textAlign: "justify",
     fontFamily: "Inter-Bold",
     fontSize: 18,
     color: "white",
