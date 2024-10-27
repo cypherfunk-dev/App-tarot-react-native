@@ -15,6 +15,7 @@ import Trigger from "@/components/Trigger";
 import BotonNavModelo from "./BotonNavModelo"; // Importa tu componente de navegación
 import { Info } from "./Info";
 import Mazos from "./Mazos";
+import Correspondencias from "./Correspondencias";
 
 export const Card = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -71,7 +72,7 @@ export const Card = () => {
             </Suspense>
           </Canvas>
         </View>
-        <Info />
+        <Correspondencias />
       </ScrollView>
     </SafeAreaView>
   );
@@ -94,14 +95,14 @@ const styles = StyleSheet.create({
     padding: 30,
     fontFamily: "Inter-Bold",
     fontSize: 24,
-    color: "white",
+    color: "black",
     textAlign: "center",
   },
   text: {
     textAlign: "left",
     fontFamily: "Inter-Light",
     fontSize: 21,
-    color: "white",
+    color: "black",
     lineHeight: 25,
   },
   fixedNavBar: {

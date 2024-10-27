@@ -34,25 +34,24 @@ export const Info = () => {
 
 const styles = StyleSheet.create({
   textContainer: {
-    gap: 4,
-    marginVertical: 30,
-    paddingHorizontal: 20,
-    marginHorizontal: 17,
-    backgroundColor: "purple",
+    flexGrow: 1,
+    marginHorizontal: 15,
+    padding: 15,
+    backgroundColor: "#f5f5f5",
     borderRadius: 20,
   },
   textTitle: {
     padding: 30,
     fontFamily: "Inter-Bold",
     fontSize: 24,
-    color: "white",
+    color: "black",
     textAlign: "center",
   },
   text: {
     textAlign: "left",
     fontFamily: "Inter-Light",
     fontSize: 21,
-    color: "white",
+    color: "black",
     lineHeight: 25,
   },
 });
