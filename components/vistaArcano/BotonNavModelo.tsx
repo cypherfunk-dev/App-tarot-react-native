@@ -1,11 +1,9 @@
 import React from "react";
 import { View, Pressable, Text, StyleSheet } from "react-native";
+import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const BotonNavModelo = () => {
-
-
-  
+const BotonNavModelo = ({ setActiveComponent }) => {
   return (
     <View style={styles.navBar}>
       <Pressable
@@ -13,23 +11,24 @@ const BotonNavModelo = () => {
           styles.button,
           { backgroundColor: pressed ? "#DDDDDD" : "transparent" },
         ]}
-        onPress={() => console.log("Button 1 pressed")}
+        onPress={() => setActiveComponent("Info")}
       >
         <View style={styles.buttonContent}>
           <Icon name="info" size={20} color="#000" />
           <Text style={styles.buttonText}>Info</Text>
         </View>
       </Pressable>
+
       <Pressable
         style={({ pressed }) => [
           styles.button,
           { backgroundColor: pressed ? "#DDDDDD" : "transparent" },
         ]}
-        onPress={() => console.log("Button 2 pressed")}
+        onPress={() => setActiveComponent("Data")}
       >
         <View style={styles.buttonContent}>
           <Icon name="map" size={20} color="#000" />
-          <Text style={styles.buttonText}>Correspondencias</Text>
+          <Text style={styles.buttonText}>Data</Text>
         </View>
       </Pressable>
       <Pressable
@@ -37,11 +36,11 @@ const BotonNavModelo = () => {
           styles.button,
           { backgroundColor: pressed ? "#DDDDDD" : "transparent" },
         ]}
-        onPress={() => console.log("Button 3 pressed")}
+        onPress={() => setActiveComponent("Decks")}
       >
         <View style={styles.buttonContent}>
           <Icon name="th" size={20} color="#000" />
-          <Text style={styles.buttonText}>Mazos</Text>
+          <Text style={styles.buttonText}>Decks</Text>
         </View>
       </Pressable>
     </View>

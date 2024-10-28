@@ -11,15 +11,28 @@ import { OrbitControls } from "@react-three/drei";
 import sacerModel from "../assets/models/sacer.glb";
 
 import Loader from "@/components/Loader";
-import Trigger from "@/components/Trigger"; 
-import BotonNavModelo from "./BotonNavModelo"; // Importa tu componente de navegación
-import { Info } from "./Info";
-import Mazos from "./Mazos";
-import Correspondencias from "./Correspondencias";
+import Trigger from "@/components/Trigger";
+import BotonNavModelo from "./vistaArcano/BotonNavModelo"; // Importa tu componente de navegación
+import { Info } from "./vistaArcano/Info";
+import Mazos from "./vistaArcano/Mazos";
+import Correspondencias from "./vistaArcano/Correspondencias";
 
 export const Card = () => {
   const [loading, setLoading] = useState<boolean>(true);
+  const [active, setActive] = useState<string>("");
   const insets = useSafeAreaInsets();
+  const renderActiveComponent = () => {
+    switch (active) {
+      case "Info":
+        return <Info />; // Renderiza el componente Info
+      case "Data":
+        return <Correspondencias />; // Renderiza el componente Data
+      case "Decks":
+        return <Mazos />; // Renderiza el componente Decks
+      default:
+        return <Info />; // Renderiza el componente Info por defecto
+    }
+  };
 
   return (
     <SafeAreaView
@@ -34,7 +47,7 @@ export const Card = () => {
 
       {/* Barra de navegación fija */}
       <View style={styles.fixedNavBar}>
-        <BotonNavModelo />
+        <BotonNavModelo setActiveComponent={setActive} />
       </View>
       {/* Contenedor de la galería de imágenes */}
 
@@ -72,7 +85,8 @@ export const Card = () => {
             </Suspense>
           </Canvas>
         </View>
-        <Info />
+        {/* Aqui va el componente renderizado */}
+        {renderActiveComponent()}
       </ScrollView>
     </SafeAreaView>
   );
