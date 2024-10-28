@@ -11,7 +11,7 @@ import { OrbitControls } from "@react-three/drei";
 import sacerModel from "../assets/models/sacer.glb";
 
 import Loader from "@/components/Loader";
-import Trigger from "@/components/Trigger";
+import Trigger from "@/components/Trigger"; 
 import BotonNavModelo from "./BotonNavModelo"; // Importa tu componente de navegación
 import { Info } from "./Info";
 import Mazos from "./Mazos";
@@ -72,7 +72,7 @@ export const Card = () => {
             </Suspense>
           </Canvas>
         </View>
-        <Correspondencias />
+        <Mazos />
       </ScrollView>
     </SafeAreaView>
   );

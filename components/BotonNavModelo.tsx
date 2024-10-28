@@ -3,6 +3,9 @@ import { View, Pressable, Text, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const BotonNavModelo = () => {
+
+
+  
   return (
     <View style={styles.navBar}>
       <Pressable

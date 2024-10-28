@@ -5,28 +5,24 @@ export const Info = () => {
     <View style={styles.textContainer}>
       <Text style={styles.textTitle}>La Alta Sacerdotisa</Text>
       <Text style={styles.text}>
-        {/* Texto largo aquí */}
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus sunt
-        doloremque officiis, doloribus deserunt deleniti unde nemo dolor ipsa
-        tenetur nobis harum voluptates vel, facilis possimus velit omnis,
-        consequuntur dolore. Lorem ipsum dolor sit amet consectetur adipisicing
-        elit. Obcaecati ratione rem sit in esse quibusdam iste, consequatur
-        omnis fuga accusantium. Porro, laboriosam consectetur quaerat ipsa
-        beatae eaque iusto magni vel. Quod facilis natus dolorem necessitatibus
-        id, accusamus vitae ipsa! Modi aperiam velit nisi aspernatur quisquam,
-        consequatur nulla, voluptatem facere ea, officiis similique excepturi.
-        Aspernatur ipsa fuga officia, consequatur magnam non? Voluptatibus
-        facilis eaque accusantium dolor ipsam quas quia asperiores voluptate
-        cupiditate inventore deleniti possimus, sapiente facere vero!
-        Blanditiis, similique consequatur at a dignissimos vero aspernatur
-        dolorum expedita ut, fugiat minima. Cum quaerat corporis vero quasi
-        mollitia minima ratione accusantium laborum, exercitationem, itaque
-        ipsum odio debitis recusandae accusamus, labore quod sunt atque officiis
-        harum placeat temporibus provident distinctio pariatur totam! Culpa. Ea
-        quas culpa consequuntur tenetur ad voluptatem magni. Quos, dolorem
-        officiis esse temporibus, nulla obcaecati fugit mollitia vel ab eos
-        cumque earum? Ex suscipit modi, odio pariatur aperiam expedita enim!
-        {/* Agrega más texto aquí si lo necesitas */}
+        La carta de "La Papisa" (o "La Sacerdotisa") es la segunda carta de los Arcanos Mayores en el tarot y representa sabiduría, intuición, conocimiento oculto y espiritualidad. En la imagen típica de esta carta, se muestra a una mujer sentada en un trono, generalmente vestida con un manto azul y rodeada de simbolismo religioso o espiritual.
+
+        ### Descripción visual:
+
+        1. **Personaje central**: La figura femenina es solemne, calmada y de expresión introspectiva, a menudo con un libro o pergamino en su regazo, simbolizando conocimiento oculto o secreto.
+
+        2. **Vestimenta**: La Papisa suele llevar una túnica azul o blanca y un velo que cubre parcialmente su cabeza, lo cual representa pureza, serenidad y conexión con lo espiritual.
+
+        3. **Símbolos de poder y sabiduría**:
+        - **Libro o pergamino**: Representa el conocimiento esotérico y la sabiduría que no se revela a todos, sino solo a quienes buscan comprender a un nivel más profundo.
+        - **Pilares**: A menudo, está flanqueada por dos pilares (a veces etiquetados como "B" y "J", aludiendo a Boaz y Jakin del Templo de Salomón), que simbolizan el equilibrio entre lo consciente y lo inconsciente, la luz y la oscuridad.
+        - **Luna creciente**: Puede aparecer a sus pies o en su tocado, simbolizando la intuición, el misterio y el poder femenino.
+
+        4. **Color y ambiente**: Los colores suelen ser fríos, como azul y blanco, que evocan calma y sabiduría espiritual. En algunos mazos, se ve un fondo oscuro o estrellado, que representa los misterios del cosmos.
+
+        ### Simbolismo de La Papisa
+
+        La Papisa es un arquetipo de sabiduría oculta y percepción intuitiva. En una lectura de tarot, su aparición suele sugerir la necesidad de confiar en la intuición, de explorar el conocimiento espiritual o de respetar los secretos. También puede simbolizar paciencia, la necesidad de esperar el momento adecuado para actuar o explorar el inconsciente.
       </Text>
     </View>
   );
