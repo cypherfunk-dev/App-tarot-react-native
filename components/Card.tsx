@@ -72,7 +72,7 @@ export const Card = () => {
             </Suspense>
           </Canvas>
         </View>
-        <Mazos />
+        <Info />
       </ScrollView>
     </SafeAreaView>
   );

@@ -3,8 +3,8 @@ import { View, Text, StyleSheet } from "react-native";
 export const Info = () => {
   return (
     <View style={styles.textContainer}>
-      <Text style={styles.textTitle}>La Alta Sacerdotisa</Text>
-      <Text style={styles.text}>
+      <Text >La Alta Sacerdotisa</Text>
+      <Text >
         La carta de "La Papisa" (o "La Sacerdotisa") es la segunda carta de los Arcanos Mayores en el tarot y representa sabiduría, intuición, conocimiento oculto y espiritualidad. En la imagen típica de esta carta, se muestra a una mujer sentada en un trono, generalmente vestida con un manto azul y rodeada de simbolismo religioso o espiritual.
 
         ### Descripción visual:
