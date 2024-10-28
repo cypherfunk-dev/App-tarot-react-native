@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Pressable, Text, StyleSheet } from "react-native";
-import { Link } from "expo-router";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const BotonNavModelo = ({ setActiveComponent }) => {

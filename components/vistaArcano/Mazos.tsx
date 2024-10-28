@@ -5,15 +5,15 @@ const data = [
   { key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }, { key: 'E' }, { key: 'F' }, { key: 'G' }, { key: 'H' }, { key: 'I' }, { key: 'J' },
 ];
 const images = [
-  require("../assets/images/Mazos/2/2_0.jpg"),
-  require("../assets/images/Mazos/2/2_1.jpg"),
-  require("../assets/images/Mazos/2/2_2.jpg"),
-  require("../assets/images/Mazos/2/2_3.jpg"),
-  require("../assets/images/Mazos/2/2_4.jpg"),
-  require("../assets/images/Mazos/2/2_5.jpg"),
-  require("../assets/images/Mazos/2/2_6.jpg"),
-  require("../assets/images/Mazos/2/2_7.jpg"),
-  require("../assets/images/Mazos/2/2_8.jpg"),
+  require("../../assets/images/Mazos/2/2_0.jpg"),
+  require("../../assets/images/Mazos/2/2_1.jpg"),
+  require("../../assets/images/Mazos/2/2_2.jpg"),
+  require("../../assets/images/Mazos/2/2_3.jpg"),
+  require("../../assets/images/Mazos/2/2_4.jpg"),
+  require("../../assets/images/Mazos/2/2_5.jpg"),
+  require("../../assets/images/Mazos/2/2_6.jpg"),
+  require("../../assets/images/Mazos/2/2_7.jpg"),
+  require("../../assets/images/Mazos/2/2_8.jpg"),
 ];
 
 const formatData = (data, numColumns) => {
