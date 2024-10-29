@@ -7,7 +7,7 @@ import {
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import { Canvas } from "@react-three/fiber/native";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, Stars } from "@react-three/drei";
 import sacerModel from "../assets/models/sacer.glb";
 
 import Loader from "@/components/Loader";
@@ -21,6 +21,7 @@ export const Card = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [active, setActive] = useState<string>("");
   const insets = useSafeAreaInsets();
+
   const renderActiveComponent = () => {
     switch (active) {
       case "Info":
@@ -78,6 +79,15 @@ export const Card = () => {
             <directionalLight position={[0, 1, 0]} args={["white", 15]} />
             <directionalLight position={[0, -1, 0]} args={["white", 2]} />
             {/* Cargar el modelo 3D */}
+            {/* <Stars
+              radius={100} // Asegúrate de que este valor sea un número
+              depth={50} // Asegúrate de que este valor sea un número
+              count={5000} // Asegúrate de que este valor sea un número
+              factor={4} // Asegúrate de que este valor sea un número
+              saturation={0} // Asegúrate de que este valor sea un número
+              fade={true} // Este valor puede ser booleano
+              speed={1} // Asegúrate de que este valor sea un número
+            /> */}
             <Suspense fallback={<Trigger setLoading={setLoading} />}>
               <group>
                 <Gltf src={sacerModel} scale={3} />
@@ -96,6 +106,7 @@ const styles = StyleSheet.create({
   modelContainer: {
     flex: 1,
     marginTop: -42,
+    backgroundColor: "black",
   },
   textContainer: {
     gap: 4,
@@ -104,20 +115,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 17,
     backgroundColor: "purple",
     borderRadius: 20,
-  },
-  textTitle: {
-    padding: 30,
-    fontFamily: "Inter-Bold",
-    fontSize: 24,
-    color: "black",
-    textAlign: "center",
-  },
-  text: {
-    textAlign: "left",
-    fontFamily: "Inter-Light",
-    fontSize: 21,
-    color: "black",
-    lineHeight: 25,
   },
   fixedNavBar: {
     position: "absolute", // Hace que la barra sea fija

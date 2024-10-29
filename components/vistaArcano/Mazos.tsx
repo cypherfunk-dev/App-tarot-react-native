@@ -1,8 +1,24 @@
-import React from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions, Image } from 'react-native';
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Dimensions,
+  Image,
+} from "react-native";
 
 const data = [
-  { key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }, { key: 'E' }, { key: 'F' }, { key: 'G' }, { key: 'H' }, { key: 'I' }, { key: 'J' },
+  { key: "A" },
+  { key: "B" },
+  { key: "C" },
+  { key: "D" },
+  { key: "E" },
+  { key: "F" },
+  { key: "G" },
+  { key: "H" },
+  { key: "I" },
+  { key: "J" },
 ];
 const images = [
   require("../../assets/images/Mazos/2/2_0.jpg"),
@@ -18,8 +34,11 @@ const images = [
 
 const formatData = (data, numColumns) => {
   const numberOfFullRows = Math.floor(data.length / numColumns);
-  let numberOfElementsLastRow = data.length - (numberOfFullRows * numColumns);
-  while (numberOfElementsLastRow !== numColumns && numberOfElementsLastRow !== 0) {
+  let numberOfElementsLastRow = data.length - numberOfFullRows * numColumns;
+  while (
+    numberOfElementsLastRow !== numColumns &&
+    numberOfElementsLastRow !== 0
+  ) {
     data.push({ key: `blank-${numberOfElementsLastRow}`, empty: true });
     numberOfElementsLastRow++;
   }
@@ -27,7 +46,7 @@ const formatData = (data, numColumns) => {
 };
 
 const numColumns = 3;
-const cardWidth = Dimensions.get('window').width / numColumns;
+const cardWidth = Dimensions.get("window").width / numColumns;
 
 export default class Mazos extends React.Component {
   renderItem = ({ item, index }) => {
@@ -41,7 +60,7 @@ export default class Mazos extends React.Component {
           style={{
             width: cardWidth - 10,
             height: cardWidth * 1.5,
-            backgroundColor: 'powderblue',
+            backgroundColor: "powderblue",
           }}
         />
       </View>
@@ -67,19 +86,19 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   item: {
-    backgroundColor: '#4D243D',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#4D243D",
+    alignItems: "center",
+    justifyContent: "center",
     flex: 1,
     margin: 1,
     height: cardWidth * 1.5,
-    shadowColor: '#ffffffs',       // Color de la sombra
+    shadowColor: "#ffffffs", // Color de la sombra
     shadowOffset: { width: 0, height: 2 }, // Desplazamiento de la sombra
-    shadowOpacity: 0.3,        // Opacidad de la sombra (0 - 1)
-    shadowRadius: 4,           // Radio de desenfoque de la sombra
-    elevation: 5,              // Sombra en Android
+    shadowOpacity: 0.3, // Opacidad de la sombra (0 - 1)
+    shadowRadius: 4, // Radio de desenfoque de la sombra
+    elevation: 5, // Sombra en Android
   },
   itemInvisible: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
 });
