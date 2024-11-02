@@ -8,14 +8,13 @@ import {
 } from "react-native-safe-area-context";
 import { Canvas } from "@react-three/fiber/native";
 import { OrbitControls, Stars } from "@react-three/drei";
-import sacerModel from "../assets/models/sacer.glb";
-
+import sacerModel from "../../assets/models/sacer.glb";
 import Loader from "@/components/Loader";
 import Trigger from "@/components/Trigger";
-import BotonNavModelo from "./vistaArcano/BotonNavModelo"; // Importa tu componente de navegación
-import { Info } from "./vistaArcano/Info";
-import Mazos from "./vistaArcano/Mazos";
-import Correspondencias from "./vistaArcano/Correspondencias";
+import BotonNavModelo from "../../components/vistaArcano/BotonNavModelo"; // Importa tu componente de navegación
+import { Info } from "../../components/vistaArcano/Info";
+import Mazos from "../../components/vistaArcano/Mazos";
+import Correspondencias from "../../components/vistaArcano/Correspondencias";
 
 export const Card = () => {
   const [loading, setLoading] = useState<boolean>(true);

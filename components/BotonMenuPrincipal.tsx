@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter, Link } from "expo-router";
+import Inicio from "@/app/(tabs)/inicio";
 
 interface BotonMenuPrincipalProps {
   nombre: string;
@@ -11,11 +13,21 @@ const BotonMenuPrincipal: React.FC<BotonMenuPrincipalProps> = ({
   nombre,
   ruta,
 }) => {
+  const router = useRouter();
+
+  const handlePress = () => {
+    const rutaCompleta = `/${ruta}`; // Aquí te aseguras de que la ruta esté bien formada
+    router.navigate(rutaCompleta as any);
+    console.log(rutaCompleta);
+  };
+
   return (
     <View style={styles.buttonContainer}>
       <Pressable
         style={styles.button}
-        onPress={() => alert("You pressed a button.")}
+        onPress={() => {
+          handlePress();
+        }}
       >
         <LinearGradient
           // Button Linear Gradient
