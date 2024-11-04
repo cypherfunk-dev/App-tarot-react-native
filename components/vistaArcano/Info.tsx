@@ -2,9 +2,9 @@ import { View, Text, StyleSheet } from "react-native";
 
 export const Info = () => {
   return (
-    <View className="bg-gray-800">
-      <Text>La Alta Sacerdotisa</Text>
-      <Text className="">
+    <View style={styles.textContainer}>
+      <Text className="p-4 text-center text-2xl">La Alta Sacerdotisa</Text>
+      <Text className="p-4 text-xl">
         La carta de "La Papisa" (o "La Sacerdotisa") es la segunda carta de los
         Arcanos Mayores en el tarot y representa sabiduría, intuición,
         conocimiento oculto y espiritualidad. En la imagen típica de esta carta,
@@ -38,14 +38,15 @@ export const Info = () => {
   );
 };
 
-// const styles = StyleSheet.create({
-//   textContainer: {
-//     flexGrow: 1,
-//     marginHorizontal: 15,
-//     padding: 15,
-//     backgroundColor: "#f5f5f5",
-//     borderRadius: 20,
-//   },
+const styles = StyleSheet.create({
+  textContainer: {
+    flexGrow: 1,
+    marginHorizontal: 15,
+    padding: 15,
+    backgroundColor: "#f5f5f5",
+    borderRadius: 20,
+  },
+});
 //   textTitle: {
 //     padding: 30,
 //     fontFamily: "Inter-Bold",

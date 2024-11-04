@@ -45,8 +45,10 @@ const Correspondencias: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    padding: 20,
+    marginHorizontal: 15,
+    padding: 15,
     backgroundColor: "#f5f5f5",
+    borderRadius: 20,
   },
   title: {
     fontSize: 24,

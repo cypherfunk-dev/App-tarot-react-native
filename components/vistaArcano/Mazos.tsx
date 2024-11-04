@@ -82,8 +82,11 @@ export default class Mazos extends React.Component {
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginVertical: 20,
+    flexGrow: 1,
+    marginHorizontal: 15,
+    padding: 15,
+    backgroundColor: "#f5f5f5",
+    borderRadius: 20,
   },
   item: {
     backgroundColor: "#4D243D",
