@@ -67,7 +67,6 @@ const Arcanos: React.FC = () => {
       >
         <Suspense fallback={<Text>Loading...</Text>}>
           <Card />
-
         </Suspense>
       </Modal>
     </SafeAreaView>
