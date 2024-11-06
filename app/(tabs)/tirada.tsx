@@ -18,6 +18,7 @@ const Tirada = () => {
     useState<Accelerometer.Subscription | null>(null);
 
   const [lastShakeTime, setLastShakeTime] = useState(Date.now());
+  const [count, setCount] = useState(0);
 
   const _subscribe = () => {
     setSubscription(
@@ -58,11 +59,14 @@ const Tirada = () => {
         const [isSelected, setIsSelected] = useState(false);
 
         const selectCardHandler = () => {
-          setIsSelected(!isSelected);
-          if (isSelected) {
-            translateY.value = withTiming(0, { duration: 500 });
-          } else {
+          if (count < 3 && !isSelected) {
+            setIsSelected(!isSelected);
+            setCount(count + 1);
             translateY.value = withTiming(-100, { duration: 500 });
+          } else if (isSelected) {
+            setIsSelected(!isSelected);
+            setCount(count - 1);
+            translateY.value = withTiming(0, { duration: 500 });
           }
         };
         const animatedCardStyle = useAnimatedStyle(() => {
