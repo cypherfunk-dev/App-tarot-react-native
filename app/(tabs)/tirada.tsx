@@ -1,91 +1,126 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CardBack from "../../assets/images/miniaturas/back.jpg";
 import { Image } from "expo-image";
-import { View, StyleSheet, Pressable } from "react-native";
-import { Accelerometer } from "expo-sensors";
-import BotonMenuPrincipal from "@/components/BotonMenuPrincipal";
+import { View, StyleSheet, Pressable, Text } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
+  withSequence,
+  withDelay,
+  runOnJS,
 } from "react-native-reanimated";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Tirada = () => {
-  // Parámetros y hooks para el acelerómetro
-  const [{ x, y, z }, setData] = useState({ x: 0, y: 0, z: 0 });
-  const [subscription, setSubscription] =
-    useState<Accelerometer.Subscription | null>(null);
+  const cards = new Array(22).fill(null).map(() => ({
+    translateY: useSharedValue(0),
+    translateX: useSharedValue(0),
+    rotation: useSharedValue(0),
+    zIndex: useSharedValue(0),
+  }));
 
-  const [lastShakeTime, setLastShakeTime] = useState(Date.now());
-  const [count, setCount] = useState(0);
+  const shuffleCards = async () => {
+    const wait = (ms: number) =>
+      new Promise((resolve) => setTimeout(resolve, ms));
+    // Paso 1: Mezcla inicial aleatoria de las cartas en X e Y
+    cards.forEach((card, index) => {
+      const randomX = Math.random() * 200 - 100; // Movimiento aleatorio en X
+      const randomY = Math.random() * 200 - 100; // Movimiento aleatorio en Y
+      const randomRotation = Math.random() * 360; // Rotación aleatoria para más variabilidad
 
-  const _subscribe = () => {
-    setSubscription(
-      Accelerometer.addListener((data) => {
-        setData(data);
+      card.translateX.value = withTiming(randomX, { duration: 300 });
+      card.translateY.value = withTiming(randomY, { duration: 300 });
+      card.rotation.value = withTiming(randomRotation, { duration: 300 });
+    });
+    // Paso 2: Elevar las cartas superiores
+    setTimeout(() => {
+      const topCards = cards.slice(11, 21);
+      topCards.forEach((card, idx) => {
+        card.zIndex.value = 1;
+        card.translateY.value = withTiming(-350, { duration: 300 });
+        card.translateX.value = withTiming(Math.random() * 50 - 25, {
+          duration: 300,
+        });
 
-        // Detectar si el dispositivo ha sido agitado
-        const acceleration = Math.sqrt(
-          data.x * data.x + data.y * data.y + data.z * data.z
-        );
-        if (acceleration > 1.7) {
-          // Ajusta este valor para mayor o menor sensibilidad
-          const currentTime = Date.now();
-          if (currentTime - lastShakeTime > 500) {
-            // Intervalo para evitar múltiples logs en un mismo movimiento
-            console.log("¡Dispositivo agitado!");
-            setLastShakeTime(currentTime);
-          }
-        }
-      })
-    );
+        // Retornar estas cartas al fondo del mazo
+        setTimeout(
+          () => {
+            card.translateY.value = withTiming(0, { duration: 300 });
+            card.translateX.value = withTiming(0, { duration: 300 });
+            card.zIndex.value = -99;
+          },
+          800 + idx * 100
+        ); // Delay escalonado para efecto de bajada
+      });
+    }, 800);
+    await wait(1500); // Pausa de 300ms (tiempo de duración de la animación)
+
+    // Paso 3: Elevar las cartas inferiores
+    setTimeout(() => {
+      const botCards = cards.slice(0, 10);
+      botCards.forEach((card, idx) => {
+        card.zIndex.value = 1;
+        card.translateY.value = withTiming(-300, { duration: 300 });
+        card.translateX.value = withTiming(Math.random() * 50 - 25, {
+          duration: 300,
+        });
+
+        // Retornar estas cartas al fondo del mazo
+        setTimeout(
+          () => {
+            card.translateY.value = withTiming(0, { duration: 300 });
+            card.translateX.value = withTiming(0, { duration: 300 });
+            card.zIndex.value = -99;
+          },
+          1000 + idx * 100
+        ); // Delay escalonado para efecto de bajada
+      });
+    }, 1300);
+    await wait(1500); // Pausa de 300ms (tiempo de duración de la animación)
+    setTimeout(() => {
+      cards.forEach((card) => {
+        card.translateX.value = withTiming(0, { duration: 300 });
+        card.translateY.value = withTiming(0, { duration: 300 });
+      });
+    }, cards.length * 100); // Esperar a que todas las cartas terminen de mezclarse
+    // Paso 4: Organizar todas las cartas en una forma semicircular (como una sonrisa)
+    await wait(2000); // Pausa de 300ms (tiempo de duración de la animación)
+
+    setTimeout(() => {
+      cards.forEach((card, index) => {
+        const centerX = 120; // Posición central en X
+        const centerY = -160; // Posición central en Y, un poco hacia abajo para la forma de sonrisa
+        const radius = 80; // Radio del círculo
+        const totalCards = cards.length;
+
+        const angle = (index / totalCards) * Math.PI; // Distribución semicircular
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+
+        // Movimiento suave de las cartas para colocarlas en la forma semicircular
+        card.translateX.value = withTiming(x, { duration: 500 });
+        card.translateY.value = withTiming(y, { duration: 500 });
+        card.zIndex.value = 0; // Aseguramos que todas las cartas queden al mismo nivel en Z
+      });
+    }, 2500); // Después de todo el desorden, organizamos en la forma semicircular
   };
-
-  const _unsubscribe = () => {
-    subscription && subscription.remove();
-    setSubscription(null);
-  };
-
-  useEffect(() => {
-    _subscribe();
-    return () => _unsubscribe();
-  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      {new Array(22).fill(null).map((_, index) => {
-        const translateY = useSharedValue(0);
-        const [isSelected, setIsSelected] = useState(false);
-
-        const selectCardHandler = () => {
-          if (count < 3 && !isSelected) {
-            setIsSelected(!isSelected);
-            setCount(count + 1);
-            translateY.value = withTiming(-100, { duration: 500 });
-          } else if (isSelected) {
-            setIsSelected(!isSelected);
-            setCount(count - 1);
-            translateY.value = withTiming(0, { duration: 500 });
-          }
-        };
-        const animatedCardStyle = useAnimatedStyle(() => {
-          return {
-            transform: [{ translateY: translateY.value }],
-            margin: index * 10,
-          };
-        });
+      {cards.map((card, index) => {
+        const animatedCardStyle = useAnimatedStyle(() => ({
+          transform: [
+            { translateX: card.translateX.value },
+            { translateY: card.translateY.value },
+          ],
+          zIndex: index, // Controlar el índice de superposición
+        }));
 
         return (
-          <Animated.View
-            key={index}
-            style={[
-              styles.card,
-              animatedCardStyle,
-              { transform: [{ translateX: index * 10 }] },
-            ]}
-          >
-            <Pressable onPress={() => selectCardHandler(translateY)}>
+          <Animated.View key={index} style={[styles.card, animatedCardStyle]}>
+            <Pressable>
               <Image
                 source={CardBack}
                 contentFit="cover"
@@ -95,8 +130,15 @@ const Tirada = () => {
           </Animated.View>
         );
       })}
-      <View style={styles.boton}>
-        <BotonMenuPrincipal nombre="Revolver" ruta="gola" />
+      <View style={styles.containerboton}>
+        <Pressable style={styles.button} onPress={shuffleCards}>
+          <LinearGradient
+            colors={["#4c669f", "#3b5998", "#1a3f69"]}
+            style={styles.button}
+          >
+            <Text style={styles.buttonLabel}>Revolver Cartas</Text>
+          </LinearGradient>
+        </Pressable>
       </View>
     </SafeAreaView>
   );
@@ -112,17 +154,35 @@ const styles = StyleSheet.create({
     height: 300,
     aspectRatio: 2 / 3,
     position: "absolute",
-    margin: 10,
+    marginBottom: 50,
   },
   image: {
     width: "100%",
     height: "100%",
     borderRadius: 5,
   },
-  boton: {
+  containerboton: {
     alignItems: "flex-end",
     marginBottom: -80,
     justifyContent: "center",
+    width: 220,
+    height: 68,
+    marginHorizontal: 20,
+    padding: 3,
+  },
+  button: {
+    borderRadius: 30,
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    borderWidth: 1.5,
+    borderColor: "#cdac8d",
+  },
+  buttonLabel: {
+    color: "#dddae1",
+    fontSize: 16,
   },
 });
 
