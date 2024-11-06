@@ -25,10 +25,10 @@ const Inicio = () => {
       <SafeAreaView>
         <Image
           style={styles.imge}
-          source={require("../../assets/images/inicio.jpg")}
+          source={require("../assets/images/inicio.jpg")}
         />
       </SafeAreaView>
-      <View style={styles.botoncontainer}>
+      {/* <View style={styles.botoncontainer}>
         <BotonMenuPrincipal nombre="Arcanos" ruta="arcanos" />
         <BotonMenuPrincipal nombre="Tirada" ruta="tirada" />
       </View>
@@ -36,7 +36,7 @@ const Inicio = () => {
       <View style={styles.botoncontainer}>
         <BotonMenuPrincipal nombre="Conversar" ruta="informacion" />
         <BotonMenuPrincipal nombre="Explorar" ruta="explorar" />
-      </View>
+      </View> */}
     </SafeAreaProvider>
   );
 };

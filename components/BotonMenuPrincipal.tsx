@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter, Link } from "expo-router";
-import Inicio from "@/app/(tabs)/inicio";
+import Inicio from "@/components/inicio";
 
 interface BotonMenuPrincipalProps {
   nombre: string;
@@ -18,7 +18,6 @@ const BotonMenuPrincipal: React.FC<BotonMenuPrincipalProps> = ({
   const handlePress = () => {
     const rutaCompleta = `/${ruta}`; // Aquí te aseguras de que la ruta esté bien formada
     router.navigate(rutaCompleta as any);
-    console.log(rutaCompleta);
   };
 
   return (
