@@ -1,19 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CardBack from "../../assets/images/miniaturas/back.jpg";
 import { Image } from "expo-image";
-import { View, StyleSheet, Pressable, Text } from "react-native";
+import { View, StyleSheet, Pressable, Text, Dimensions } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
-  withSequence,
-  withDelay,
-  runOnJS,
 } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
+import { Accelerometer } from "expo-sensors";
+const { width, height } = Dimensions.get("window");
 
 const Tirada = () => {
+  // Parámetros y hooks para el acelerómetro
+  const [{ x, y, z }, setData] = useState({ x: 0, y: 0, z: 0 });
+  const [subscription, setSubscription] =
+    useState<Accelerometer.Subscription | null>(null);
+
+  const [lastShakeTime, setLastShakeTime] = useState(Date.now());
+  const [count, setCount] = useState(0);
+
+  const _subscribe = () => {
+    setSubscription(
+      Accelerometer.addListener((data) => {
+        setData(data);
+
+        // Detectar si el dispositivo ha sido agitado
+        const acceleration = Math.sqrt(
+          data.x * data.x + data.y * data.y + data.z * data.z
+        );
+        if (acceleration > 1.7) {
+          // Ajusta este valor para mayor o menor sensibilidad
+          const currentTime = Date.now();
+          if (currentTime - lastShakeTime > 500) {
+            // Intervalo para evitar múltiples logs en un mismo movimiento
+            cards.forEach((card, index) => {
+              // Generar valores aleatorios para los ejes X y Y
+              const randomX = Math.random() * 150 - 75;
+              const randomY = Math.random() * 150 - 75;
+        
+              // Aplicar el movimiento con un leve desfase para efecto de "mezcla"
+              setTimeout(() => {
+                card.translateX.value = withTiming(randomX, { duration: 300 });
+                card.translateY.value = withTiming(randomY, { duration: 300 });
+              }, index * 100);
+            });
+            setLastShakeTime(currentTime);
+          }
+        }
+      })
+    );
+  };
+
+  const _unsubscribe = () => {
+    subscription && subscription.remove();
+    setSubscription(null);
+  };
+
+  useEffect(() => {
+    _subscribe();
+    return () => _unsubscribe();
+  }, []);
+// Fin acelerometro
   const cards = new Array(22).fill(null).map(() => ({
     translateY: useSharedValue(0),
     translateX: useSharedValue(0),
@@ -87,17 +136,16 @@ const Tirada = () => {
     }, cards.length * 100); // Esperar a que todas las cartas terminen de mezclarse
     // Paso 4: Organizar todas las cartas en una forma semicircular (como una sonrisa)
     await wait(2000); // Pausa de 300ms (tiempo de duración de la animación)
-
     setTimeout(() => {
       cards.forEach((card, index) => {
-        const centerX = 120; // Posición central en X
-        const centerY = -160; // Posición central en Y, un poco hacia abajo para la forma de sonrisa
-        const radius = 80; // Radio del círculo
+        const centerX = width / 20; // Posición central en X
+        const centerY = height / 9; // Posición central en Y, un poco hacia abajo para la forma de sonrisa
+        const radius = 200; // Radio del círculo
         const totalCards = cards.length;
 
-        const angle = (index / totalCards) * Math.PI; // Distribución semicircular
-        const x = centerX + radius * Math.cos(angle);
-        const y = centerY + radius * Math.sin(angle);
+        const angle = (index / totalCards / 2) * Math.PI; // Distribución semicircular
+        const x = centerX + radius * Math.cos(angle) - 150; // Ajustar para centrar
+        const y = centerY + radius * Math.sin(angle) - 180; // Ajustar para centrar
 
         // Movimiento suave de las cartas para colocarlas en la forma semicircular
         card.translateX.value = withTiming(x, { duration: 500 });
@@ -136,7 +184,7 @@ const Tirada = () => {
             colors={["#4c669f", "#3b5998", "#1a3f69"]}
             style={styles.button}
           >
-            <Text style={styles.buttonLabel}>Revolver Cartas</Text>
+            <Text style={styles.buttonLabel}>Barajar Cartas</Text>
           </LinearGradient>
         </Pressable>
       </View>
@@ -147,14 +195,13 @@ const Tirada = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-end",
-    marginBottom: 100,
+    justifyContent: "center",
+    alignItems: "center",
   },
   card: {
     height: 300,
-    aspectRatio: 2 / 3,
+    aspectRatio: 3 / 6,
     position: "absolute",
-    marginBottom: 50,
   },
   image: {
     width: "100%",
@@ -162,8 +209,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   containerboton: {
-    alignItems: "flex-end",
-    marginBottom: -80,
+    position: "absolute",
+    bottom: 20, // Ajusta este valor según sea necesario
+    alignItems: "center",
     justifyContent: "center",
     width: 220,
     height: 68,
