@@ -19,7 +19,6 @@ const Tirada = () => {
     useState<Accelerometer.Subscription | null>(null);
 
   const [lastShakeTime, setLastShakeTime] = useState(Date.now());
-  const [count, setCount] = useState(0);
 
   const _subscribe = () => {
     setSubscription(
@@ -39,12 +38,12 @@ const Tirada = () => {
               // Generar valores aleatorios para los ejes X y Y
               const randomX = Math.random() * 150 - 75;
               const randomY = Math.random() * 150 - 75;
-        
+
               // Aplicar el movimiento con un leve desfase para efecto de "mezcla"
               setTimeout(() => {
-                card.translateX.value = withTiming(randomX, { duration: 300 });
-                card.translateY.value = withTiming(randomY, { duration: 300 });
-              }, index * 100);
+                card.translateX.value = withTiming(randomX, { duration: 20 });
+                card.translateY.value = withTiming(randomY, { duration: 20 });
+              }, index * 20);
             });
             setLastShakeTime(currentTime);
           }
@@ -62,7 +61,11 @@ const Tirada = () => {
     _subscribe();
     return () => _unsubscribe();
   }, []);
-// Fin acelerometro
+  // Fin acelerometro
+  const [count, setCount] = useState(0);
+
+  const [IsShuffling, setShuffling] = useState(false);
+
   const cards = new Array(22).fill(null).map(() => ({
     translateY: useSharedValue(0),
     translateX: useSharedValue(0),
@@ -71,6 +74,8 @@ const Tirada = () => {
   }));
 
   const shuffleCards = async () => {
+    if (IsShuffling) return;
+    setShuffling(true);
     const wait = (ms: number) =>
       new Promise((resolve) => setTimeout(resolve, ms));
     // Paso 1: Mezcla inicial aleatoria de las cartas en X e Y
@@ -129,9 +134,9 @@ const Tirada = () => {
     }, 1300);
     await wait(1500); // Pausa de 300ms (tiempo de duración de la animación)
     setTimeout(() => {
-      cards.forEach((card) => {
-        card.translateX.value = withTiming(0, { duration: 300 });
-        card.translateY.value = withTiming(0, { duration: 300 });
+      cards.forEach((card, index) => {
+        card.translateX.value = withTiming(index * -1.5, { duration: 300 });
+        card.translateY.value = withTiming(index * 1.5, { duration: 300 });
       });
     }, cards.length * 100); // Esperar a que todas las cartas terminen de mezclarse
     // Paso 4: Organizar todas las cartas en una forma semicircular (como una sonrisa)
@@ -150,25 +155,44 @@ const Tirada = () => {
         // Movimiento suave de las cartas para colocarlas en la forma semicircular
         card.translateX.value = withTiming(x, { duration: 500 });
         card.translateY.value = withTiming(y, { duration: 500 });
-        card.zIndex.value = 0; // Aseguramos que todas las cartas queden al mismo nivel en Z
+        card.zIndex.value = 0;
       });
-    }, 2500); // Después de todo el desorden, organizamos en la forma semicircular
+    }, 2500);
+    await wait(3000); // Pausa de 300ms (tiempo de duración de la animación)
+    setTimeout(() => {
+      setShuffling(false);
+    }, 3000);
   };
 
   return (
     <SafeAreaView style={styles.container}>
       {cards.map((card, index) => {
+        const [isSelected, setIsSelected] = useState(false);
+
+        const selectCardHandler = () => {
+          if (count < 3 && !isSelected) {
+            setIsSelected(!isSelected);
+            setCount(count + 1);
+            card.translateY.value = withTiming(-100, { duration: 500 });
+          } else if (isSelected) {
+            setIsSelected(!isSelected);
+            setCount(count - 1);
+            card.translateY.value = withTiming(0, { duration: 500 });
+          }
+        };
+
         const animatedCardStyle = useAnimatedStyle(() => ({
           transform: [
             { translateX: card.translateX.value },
             { translateY: card.translateY.value },
           ],
-          zIndex: index, // Controlar el índice de superposición
+          zIndex: index,
+          // Controlar el índice de suedperposición
         }));
 
         return (
           <Animated.View key={index} style={[styles.card, animatedCardStyle]}>
-            <Pressable>
+            <Pressable onPress={selectCardHandler}>
               <Image
                 source={CardBack}
                 contentFit="cover"
@@ -207,6 +231,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     borderRadius: 5,
+    marginHorizontal: 10, // Añade espacio entre las cartas horizontalmente
   },
   containerboton: {
     position: "absolute",
