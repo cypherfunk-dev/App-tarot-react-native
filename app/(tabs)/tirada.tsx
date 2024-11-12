@@ -30,6 +30,7 @@ const Tirada = () => {
           data.x * data.x + data.y * data.y + data.z * data.z
         );
         if (acceleration > 1.7) {
+          setShuffling(true);
           // Ajusta este valor para mayor o menor sensibilidad
           const currentTime = Date.now();
           if (currentTime - lastShakeTime > 500) {
@@ -41,11 +42,12 @@ const Tirada = () => {
 
               // Aplicar el movimiento con un leve desfase para efecto de "mezcla"
               setTimeout(() => {
-                card.translateX.value = withTiming(randomX, { duration: 20 });
-                card.translateY.value = withTiming(randomY, { duration: 20 });
-              }, index * 20);
+                card.translateX.value = withTiming(randomX, { duration: 100 });
+                card.translateY.value = withTiming(randomY, { duration: 100 });
+              }, index * 100);
             });
             setLastShakeTime(currentTime);
+            setShuffling(false);
           }
         }
       })
@@ -135,8 +137,8 @@ const Tirada = () => {
     await wait(1500); // Pausa de 300ms (tiempo de duración de la animación)
     setTimeout(() => {
       cards.forEach((card, index) => {
-        card.translateX.value = withTiming(index * -1.5, { duration: 300 });
-        card.translateY.value = withTiming(index * 1.5, { duration: 300 });
+        card.translateX.value = withTiming(index * -1.2, { duration: 300 });
+        card.translateY.value = withTiming(index * 1.2, { duration: 300 });
       });
     }, cards.length * 100); // Esperar a que todas las cartas terminen de mezclarse
     // Paso 4: Organizar todas las cartas en una forma semicircular (como una sonrisa)
@@ -168,16 +170,22 @@ const Tirada = () => {
     <SafeAreaView style={styles.container}>
       {cards.map((card, index) => {
         const [isSelected, setIsSelected] = useState(false);
-
+        const [cardStyle, setCardStyle] = useState({});
         const selectCardHandler = () => {
           if (count < 3 && !isSelected) {
             setIsSelected(!isSelected);
             setCount(count + 1);
-            card.translateY.value = withTiming(-100, { duration: 500 });
+            card.translateY.value = withTiming(card.translateY.value - 100, {
+              duration: 500,
+            });
+            setCardStyle({ borderColor: "blue", borderWidth: 3 });
           } else if (isSelected) {
             setIsSelected(!isSelected);
             setCount(count - 1);
-            card.translateY.value = withTiming(0, { duration: 500 });
+            card.translateY.value = withTiming(card.translateY.value + 100, {
+              duration: 500,
+            });
+            setCardStyle({ borderWidth: 0 });
           }
         };
 
@@ -187,7 +195,6 @@ const Tirada = () => {
             { translateY: card.translateY.value },
           ],
           zIndex: index,
-          // Controlar el índice de suedperposición
         }));
 
         return (
@@ -196,7 +203,7 @@ const Tirada = () => {
               <Image
                 source={CardBack}
                 contentFit="cover"
-                style={styles.image}
+                style={[styles.image, cardStyle]}
               />
             </Pressable>
           </Animated.View>
@@ -231,7 +238,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     borderRadius: 5,
-    marginHorizontal: 10, // Añade espacio entre las cartas horizontalmente
   },
   containerboton: {
     position: "absolute",
