@@ -150,15 +150,15 @@ const Tirada = () => {
     await wait(1500); // Pausa de 300ms (tiempo de duración de la animación)
     setTimeout(() => {
       cards.forEach((card, index) => {
-        card.translateX.value = withTiming(index * -1.2, { duration: 300 });
-        card.translateY.value = withTiming(index * 1.2, { duration: 300 });
+        card.translateX.value = withTiming(index * -1, { duration: 300 });
+        card.translateY.value = withTiming(index, { duration: 300 });
       });
     }, cards.length * 100); // Esperar a que todas las cartas terminen de mezclarse
-    // Paso 4: Organizar todas las cartas en una forma semicircular (como una sonrisa)
+    // Paso 4: Organizar todas las cartas en una forma semicircular
     await wait(2000); // Pausa de 300ms (tiempo de duración de la animación)
     setTimeout(() => {
       cards.forEach((card, index) => {
-        const centerX = width / 20; // Posición central en X
+        const centerX = width / 10; // Posición central en X
         const centerY = height / 9; // Posición central en Y, un poco hacia abajo para la forma de sonrisa
         const radius = 200; // Radio del círculo
         const totalCards = cards.length;
@@ -182,7 +182,10 @@ const Tirada = () => {
   return (
     <SafeAreaView style={styles.container}>
       {cards.map((card, index) => {
+        const [isMoving, setIsMoving] = useState(false);
         const selectCardHandler = () => {
+          if (isMoving) return;
+          setIsMoving(true);
           if (count < 3 && !selectedCards[index]) {
             setSelectedCards((prev) => {
               const newSelectedCards = [...prev];
@@ -214,14 +217,17 @@ const Tirada = () => {
               return newCardStyles;
             });
           }
+          setTimeout(() => {
+            setIsMoving(false);
+          }, 500);
         };
 
         const animatedCardStyle = useAnimatedStyle(() => ({
           transform: [
-            { translateX: card.translateX.value },
-            { translateY: card.translateY.value },
+            { translateX: card.translateX.value + index * -1.1 },
+            // Aca se le da la forma inicial al mazo de cartas que da la impresion de profundidad
+            { translateY: card.translateY.value + index * 1.05 },
           ],
-          zIndex: index,
         }));
 
         return (
