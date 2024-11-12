@@ -19,6 +19,12 @@ const Tirada = () => {
     useState<Accelerometer.Subscription | null>(null);
 
   const [lastShakeTime, setLastShakeTime] = useState(Date.now());
+  const [selectedCards, setSelectedCards] = useState<boolean[]>(
+    new Array(22).fill(false)
+  );
+  const [cardStyle, setCardStyle] = useState<any[]>(
+    new Array(22).fill({ borderWidth: 0 })
+  );
 
   const _subscribe = () => {
     setSubscription(
@@ -75,9 +81,16 @@ const Tirada = () => {
     zIndex: useSharedValue(0),
   }));
 
+  const deselectAllCards = () => {
+    setSelectedCards(new Array(selectedCards.length).fill(false));
+    setCount(0);
+    setCardStyle(new Array(cardStyle.length).fill({ borderWidth: 0 }));
+  };
+
   const shuffleCards = async () => {
     if (IsShuffling) return;
     setShuffling(true);
+    deselectAllCards();
     const wait = (ms: number) =>
       new Promise((resolve) => setTimeout(resolve, ms));
     // Paso 1: Mezcla inicial aleatoria de las cartas en X e Y
@@ -169,23 +182,37 @@ const Tirada = () => {
   return (
     <SafeAreaView style={styles.container}>
       {cards.map((card, index) => {
-        const [isSelected, setIsSelected] = useState(false);
-        const [cardStyle, setCardStyle] = useState({});
         const selectCardHandler = () => {
-          if (count < 3 && !isSelected) {
-            setIsSelected(!isSelected);
+          if (count < 3 && !selectedCards[index]) {
+            setSelectedCards((prev) => {
+              const newSelectedCards = [...prev];
+              newSelectedCards[index] = true;
+              return newSelectedCards;
+            });
             setCount(count + 1);
             card.translateY.value = withTiming(card.translateY.value - 100, {
               duration: 500,
             });
-            setCardStyle({ borderColor: "blue", borderWidth: 3 });
-          } else if (isSelected) {
-            setIsSelected(!isSelected);
+            setCardStyle((prev) => {
+              const newCardStyles = [...prev];
+              newCardStyles[index] = { borderColor: "blue", borderWidth: 3 };
+              return newCardStyles;
+            });
+          } else if (selectedCards[index]) {
+            setSelectedCards((prev) => {
+              const newSelectedCards = [...prev];
+              newSelectedCards[index] = false;
+              return newSelectedCards;
+            });
             setCount(count - 1);
             card.translateY.value = withTiming(card.translateY.value + 100, {
               duration: 500,
             });
-            setCardStyle({ borderWidth: 0 });
+            setCardStyle((prev) => {
+              const newCardStyles = [...prev];
+              newCardStyles[index] = { borderWidth: 0 };
+              return newCardStyles;
+            });
           }
         };
 
@@ -203,7 +230,7 @@ const Tirada = () => {
               <Image
                 source={CardBack}
                 contentFit="cover"
-                style={[styles.image, cardStyle]}
+                style={[styles.image, cardStyle[index]]}
               />
             </Pressable>
           </Animated.View>
