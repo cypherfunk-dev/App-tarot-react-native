@@ -9,7 +9,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
-import { Accelerometer } from "expo-sensors";
+import { rotateZ } from "@shopify/react-native-skia";
 const { width, height } = Dimensions.get("window");
 
 const Tirada = () => {
@@ -20,7 +20,7 @@ const Tirada = () => {
 
   // const [lastShakeTime, setLastShakeTime] = useState(Date.now());
   const [selectedCards, setSelectedCards] = useState<boolean[]>(
-    new Array(22).fill(false),
+    new Array(22).fill(false)
   );
   const [cardStyle, setCardStyle] = useState<any[]>(
     new Array(22).fill({ borderWidth: 0 })
@@ -71,13 +71,14 @@ const Tirada = () => {
   // }, []);
   // // Fin acelerometro
   const [count, setCount] = useState(0);
-
+  const [isButtonEnabled, setButtonEnabled] = useState(true);
   const [IsShuffling, setShuffling] = useState(false);
 
   const cards = new Array(22).fill(null).map(() => ({
     translateY: useSharedValue(0),
     translateX: useSharedValue(0),
     rotation: useSharedValue(0),
+    rotateZ: useSharedValue(0),
     zIndex: useSharedValue(0),
   }));
 
@@ -151,7 +152,7 @@ const Tirada = () => {
     setTimeout(() => {
       cards.forEach((card, index) => {
         card.translateX.value = withTiming(index, { duration: 300 });
-        card.translateY.value = withTiming(index*1.002, { duration: 300 });
+        card.translateY.value = withTiming(index * 1.002, { duration: 300 });
       });
     }, cards.length * 100); // Esperar a que todas las cartas terminen de mezclarse
     // Paso 4: Organizar todas las cartas en una forma semicircular
@@ -178,6 +179,50 @@ const Tirada = () => {
       setShuffling(false);
     }, 3000);
   };
+
+  const revealCards = () => {
+    // Elevar cartas no seleccionadas
+    cards.map((card, index) => {
+      if (!selectedCards[index]) {
+        card.translateY.value = withTiming(card.translateY.value - 1000, {
+          duration: 500,
+        });
+      }
+    });
+    // Mostrar las cartas seleccionadas y agruparlas
+
+    cards.map((card, index) => {
+      if (selectedCards[index]) {
+        setTimeout(() => {
+          card.translateY.value = withTiming(0, {
+            duration: 500,
+          });
+        }, 500);
+        setTimeout(() => {
+          card.rotateZ.value = withTiming(90, {
+            duration: 500,
+          });
+        }, 500);
+      }
+    });
+  };
+
+  const [isButtonActiveStyle, setisButtonActiveStyle] = useState<any[]>([
+    "#4c669f",
+    "#3b5998",
+    "#1a3f69",
+  ]);
+
+  // boton cambia de comportamiento al seleccionar 3 cartas
+  useEffect(() => {
+    if (count === 3) {
+      setButtonEnabled(true);
+      setisButtonActiveStyle(["#4c669f", "#3b5998", "#1a3f69"]);
+    } else {
+      setButtonEnabled(false);
+      setisButtonActiveStyle(["#808080", "#949494", "#647C90"]);
+    }
+  }, [count]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -225,9 +270,9 @@ const Tirada = () => {
         const animatedCardStyle = useAnimatedStyle(() => ({
           transform: [
             { translateX: card.translateX.value + index * -1.1 },
-            // Aca se le da la forma inicial al mazo de cartas que da la impresion de profundidad
             { translateY: card.translateY.value + index * 1.05 },
           ],
+          zIndex: card.zIndex.value,
         }));
 
         return (
@@ -252,11 +297,12 @@ const Tirada = () => {
           </LinearGradient>
         </Pressable>
 
-        <Pressable style={styles.button} onPress={shuffleCards}>
-          <LinearGradient
-            colors={["#4c669f", "#3b5998", "#1a3f69"]}
-            style={styles.button}
-          >
+        <Pressable
+          style={styles.button}
+          onPress={revealCards}
+          disabled={!isButtonEnabled}
+        >
+          <LinearGradient colors={isButtonActiveStyle} style={styles.button}>
             <Text style={styles.buttonLabel}>Voltear</Text>
           </LinearGradient>
         </Pressable>
@@ -290,6 +336,7 @@ const styles = StyleSheet.create({
     height: 68,
     marginHorizontal: 20,
     padding: 3,
+    marginBottom: 20,
   },
   button: {
     borderRadius: 30,
@@ -300,6 +347,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderWidth: 1.5,
     borderColor: "#cdac8d",
+    marginVertical: 2,
   },
   buttonLabel: {
     color: "#dddae1",
