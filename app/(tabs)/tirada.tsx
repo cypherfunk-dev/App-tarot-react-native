@@ -9,16 +9,9 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
-import { rotateZ } from "@shopify/react-native-skia";
 const { width, height } = Dimensions.get("window");
 
 const Tirada = () => {
-  // Parámetros y hooks para el acelerómetro
-  // const [{ x, y, z }, setData] = useState({ x: 0, y: 0, z: 0 });
-  // const [subscription, setSubscription] =
-  //   useState<Accelerometer.Subscription | null>(null);
-
-  // const [lastShakeTime, setLastShakeTime] = useState(Date.now());
   const [selectedCards, setSelectedCards] = useState<boolean[]>(
     new Array(22).fill(false)
   );
@@ -26,50 +19,6 @@ const Tirada = () => {
     new Array(22).fill({ borderWidth: 0 })
   );
 
-  // const _subscribe = () => {
-  //   setSubscription(
-  //     Accelerometer.addListener((data) => {
-  //       setData(data);
-
-  //       // Detectar si el dispositivo ha sido agitado
-  //       const acceleration = Math.sqrt(
-  //         data.x * data.x + data.y * data.y + data.z * data.z
-  //       );
-  //       if (acceleration > 1.7) {
-  //         setShuffling(true);
-  //         // Ajusta este valor para mayor o menor sensibilidad
-  //         const currentTime = Date.now();
-  //         if (currentTime - lastShakeTime > 500) {
-  //           // Intervalo para evitar múltiples logs en un mismo movimiento
-  //           cards.forEach((card, index) => {
-  //             // Generar valores aleatorios para los ejes X y Y
-  //             const randomX = Math.random() * 150 - 75;
-  //             const randomY = Math.random() * 150 - 75;
-
-  //             // Aplicar el movimiento con un leve desfase para efecto de "mezcla"
-  //             setTimeout(() => {
-  //               card.translateX.value = withTiming(randomX, { duration: 100 });
-  //               card.translateY.value = withTiming(randomY, { duration: 100 });
-  //             }, index * 100);
-  //           });
-  //           setLastShakeTime(currentTime);
-  //           setShuffling(false);
-  //         }
-  //       }
-  //     })
-  //   );
-  // };
-
-  // const _unsubscribe = () => {
-  //   subscription && subscription.remove();
-  //   setSubscription(null);
-  // };
-
-  // useEffect(() => {
-  //   _subscribe();
-  //   return () => _unsubscribe();
-  // }, []);
-  // // Fin acelerometro
   const [count, setCount] = useState(0);
   const [isButtonEnabled, setButtonEnabled] = useState(true);
   const [IsShuffling, setShuffling] = useState(false);
@@ -78,7 +27,7 @@ const Tirada = () => {
     translateY: useSharedValue(0),
     translateX: useSharedValue(0),
     rotation: useSharedValue(0),
-    rotateZ: useSharedValue(0),
+    rotateY: useSharedValue(0),
     zIndex: useSharedValue(0),
   }));
 
@@ -180,9 +129,11 @@ const Tirada = () => {
     }, 3000);
   };
 
-  const revealCards = () => {
+  const revealCards = async () => {
+    const wait = (ms: number) =>
+      new Promise((resolve) => setTimeout(resolve, ms));
     // Elevar cartas no seleccionadas
-    cards.map((card, index) => {
+    cards.forEach((card, index) => {
       if (!selectedCards[index]) {
         card.translateY.value = withTiming(card.translateY.value - 1000, {
           duration: 500,
@@ -190,20 +141,21 @@ const Tirada = () => {
       }
     });
     // Mostrar las cartas seleccionadas y agruparlas
-
     cards.map((card, index) => {
       if (selectedCards[index]) {
         setTimeout(() => {
-          card.translateY.value = withTiming(0, {
-            duration: 500,
-          });
-        }, 500);
-        setTimeout(() => {
-          card.rotateZ.value = withTiming(90, {
+          card.translateY.value = withTiming(index * 5, {
             duration: 500,
           });
         }, 500);
       }
+    });
+    // Rotar las cartas seleccionadas
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        card.rotateY.value = withTiming(180, { duration: 1000 });
+      }, 1000);
+      wait(1000);
     });
   };
 
@@ -271,6 +223,7 @@ const Tirada = () => {
           transform: [
             { translateX: card.translateX.value + index * -1.1 },
             { translateY: card.translateY.value + index * 1.05 },
+            { rotateY: `${card.rotateY.value}deg` },
           ],
           zIndex: card.zIndex.value,
         }));
@@ -321,6 +274,7 @@ const styles = StyleSheet.create({
     height: 300,
     aspectRatio: 3 / 6,
     position: "absolute",
+    backfaceVisibility: "hidden",
   },
   image: {
     width: "100%",
