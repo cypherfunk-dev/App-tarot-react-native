@@ -9,6 +9,32 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
+import FlipCard from "react-native-flip-card";
+const images = [
+  require("../../assets/images/miniaturas/0.jpg"),
+  require("../../assets/images/miniaturas/1.jpg"),
+  require("../../assets/images/miniaturas/2.jpg"),
+  require("../../assets/images/miniaturas/3.jpg"),
+  require("../../assets/images/miniaturas/4.jpg"),
+  require("../../assets/images/miniaturas/5.jpg"),
+  require("../../assets/images/miniaturas/6.jpg"),
+  require("../../assets/images/miniaturas/7.jpg"),
+  require("../../assets/images/miniaturas/8.jpg"),
+  require("../../assets/images/miniaturas/9.jpg"),
+  require("../../assets/images/miniaturas/10.jpg"),
+  require("../../assets/images/miniaturas/11.jpg"),
+  require("../../assets/images/miniaturas/12.jpg"),
+  require("../../assets/images/miniaturas/13.jpg"),
+  require("../../assets/images/miniaturas/14.jpg"),
+  require("../../assets/images/miniaturas/15.jpg"),
+  require("../../assets/images/miniaturas/16.jpg"),
+  require("../../assets/images/miniaturas/17.jpg"),
+  require("../../assets/images/miniaturas/18.jpg"),
+  require("../../assets/images/miniaturas/19.jpg"),
+  require("../../assets/images/miniaturas/20.jpg"),
+  require("../../assets/images/miniaturas/21.jpg"),
+];
+
 const { width, height } = Dimensions.get("window");
 
 const Tirada = () => {
@@ -27,7 +53,6 @@ const Tirada = () => {
     translateY: useSharedValue(0),
     translateX: useSharedValue(0),
     rotation: useSharedValue(0),
-    rotateY: useSharedValue(0),
     zIndex: useSharedValue(0),
   }));
 
@@ -130,8 +155,6 @@ const Tirada = () => {
   };
 
   const revealCards = async () => {
-    const wait = (ms: number) =>
-      new Promise((resolve) => setTimeout(resolve, ms));
     // Elevar cartas no seleccionadas
     cards.forEach((card, index) => {
       if (!selectedCards[index]) {
@@ -147,16 +170,22 @@ const Tirada = () => {
           card.translateY.value = withTiming(index * 5, {
             duration: 500,
           });
-        }, 500);
+        }, 1500);
+        toggleFlip();
       }
     });
     // Rotar las cartas seleccionadas
-    cards.forEach((card, index) => {
-      setTimeout(() => {
-        card.rotateY.value = withTiming(180, { duration: 1000 });
-      }, 1000);
-      wait(1000);
-    });
+    // cards.forEach((card, index) => {
+    //   setTimeout(() => {
+    //     card.rotateY.value = withTiming(180, { duration: 1000 });
+    //   }, 1000);
+    //   wait(1000);
+    // });
+  };
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const toggleFlip = () => {
+    setIsFlipped(!isFlipped);
   };
 
   const [isButtonActiveStyle, setisButtonActiveStyle] = useState<any[]>([
@@ -223,20 +252,36 @@ const Tirada = () => {
           transform: [
             { translateX: card.translateX.value + index * -1.1 },
             { translateY: card.translateY.value + index * 1.05 },
-            { rotateY: `${card.rotateY.value}deg` },
           ],
           zIndex: card.zIndex.value,
         }));
 
         return (
           <Animated.View key={index} style={[styles.card, animatedCardStyle]}>
-            <Pressable onPress={selectCardHandler}>
-              <Image
-                source={CardBack}
-                contentFit="cover"
-                style={[styles.image, cardStyle[index]]}
-              />
-            </Pressable>
+            <FlipCard
+              style={[styles.card]}
+              friction={8}
+              perspective={150}
+              flipHorizontal={true}
+              flipVertical={false}
+              flip={isFlipped}
+              clickable={false}
+            >
+              <Pressable onPress={selectCardHandler}>
+                <Image
+                  source={CardBack}
+                  contentFit="cover"
+                  style={[styles.image, cardStyle[index]]}
+                />
+              </Pressable>
+              <Pressable onPress={selectCardHandler}>
+                <Image
+                  source={images[index]}
+                  contentFit="cover"
+                  style={[styles.image, cardStyle[index]]}
+                />
+              </Pressable>
+            </FlipCard>
           </Animated.View>
         );
       })}
@@ -274,7 +319,7 @@ const styles = StyleSheet.create({
     height: 300,
     aspectRatio: 3 / 6,
     position: "absolute",
-    backfaceVisibility: "hidden",
+    // backfaceVisibility: "hidden",
   },
   image: {
     width: "100%",
