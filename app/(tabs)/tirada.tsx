@@ -34,6 +34,7 @@ const images = [
   require("../../assets/images/miniaturas/20.jpg"),
   require("../../assets/images/miniaturas/21.jpg"),
 ];
+images.sort(() => Math.random() - 0.5);
 
 const { width, height } = Dimensions.get("window");
 
@@ -66,6 +67,7 @@ const Tirada = () => {
     if (IsShuffling) return;
     setShuffling(true);
     deselectAllCards();
+    images.sort(() => Math.random() - 0.5);
     const wait = (ms: number) =>
       new Promise((resolve) => setTimeout(resolve, ms));
     // Paso 1: Mezcla inicial aleatoria de las cartas en X e Y
@@ -163,25 +165,27 @@ const Tirada = () => {
         });
       }
     });
-    // Mostrar las cartas seleccionadas y agruparlas
-    cards.map((card, index) => {
-      if (selectedCards[index]) {
+
+    const baseX = 130; // Punto inicial en X
+    const spacing = 120; // Espaciado entre las cartas
+    const revealY = 50; // Posición fija en Y
+
+    // Iterar sobre el estado selectedCards para preservar el orden de selección
+    let selectedIndex = 0;
+    selectedCards.forEach((isSelected, index) => {
+      if (isSelected) {
+        const card = cards[index]; // Asegurar que usamos la carta correcta
+        const targetX = baseX + selectedIndex * spacing; // Calcular la posición X
         setTimeout(() => {
-          card.translateY.value = withTiming(index * 5, {
-            duration: 500,
-          });
+          card.translateX.value = withTiming(targetX, { duration: 500 }); // Movimiento en X
+          card.translateY.value = withTiming(revealY, { duration: 500 }); // Movimiento en Y
         }, 1500);
+        selectedIndex--; // Decrecentar índice para la próxima carta seleccionada
         toggleFlip();
       }
     });
-    // Rotar las cartas seleccionadas
-    // cards.forEach((card, index) => {
-    //   setTimeout(() => {
-    //     card.rotateY.value = withTiming(180, { duration: 1000 });
-    //   }, 1000);
-    //   wait(1000);
-    // });
   };
+
   const [isFlipped, setIsFlipped] = useState(false);
 
   const toggleFlip = () => {
@@ -204,7 +208,6 @@ const Tirada = () => {
       setisButtonActiveStyle(["#808080", "#949494", "#647C90"]);
     }
   }, [count]);
-
   return (
     <SafeAreaView style={styles.container}>
       {cards.map((card, index) => {
