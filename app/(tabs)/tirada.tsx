@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Lectura from "../../components/Lectura";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CardBack from "../../assets/images/miniaturas/back.jpg";
 import { Image } from "expo-image";
@@ -11,30 +12,29 @@ import Animated, {
 import { LinearGradient } from "expo-linear-gradient";
 import FlipCard from "react-native-flip-card";
 const images = [
-  require("../../assets/images/miniaturas/0.jpg"),
-  require("../../assets/images/miniaturas/1.jpg"),
-  require("../../assets/images/miniaturas/2.jpg"),
-  require("../../assets/images/miniaturas/3.jpg"),
-  require("../../assets/images/miniaturas/4.jpg"),
-  require("../../assets/images/miniaturas/5.jpg"),
-  require("../../assets/images/miniaturas/6.jpg"),
-  require("../../assets/images/miniaturas/7.jpg"),
-  require("../../assets/images/miniaturas/8.jpg"),
-  require("../../assets/images/miniaturas/9.jpg"),
-  require("../../assets/images/miniaturas/10.jpg"),
-  require("../../assets/images/miniaturas/11.jpg"),
-  require("../../assets/images/miniaturas/12.jpg"),
-  require("../../assets/images/miniaturas/13.jpg"),
-  require("../../assets/images/miniaturas/14.jpg"),
-  require("../../assets/images/miniaturas/15.jpg"),
-  require("../../assets/images/miniaturas/16.jpg"),
-  require("../../assets/images/miniaturas/17.jpg"),
-  require("../../assets/images/miniaturas/18.jpg"),
-  require("../../assets/images/miniaturas/19.jpg"),
-  require("../../assets/images/miniaturas/20.jpg"),
-  require("../../assets/images/miniaturas/21.jpg"),
+  { indice: 0, ruta: require("../../assets/images/miniaturas/0.jpg") },
+  { indice: 1, ruta: require("../../assets/images/miniaturas/1.jpg") },
+  { indice: 2, ruta: require("../../assets/images/miniaturas/2.jpg") },
+  { indice: 3, ruta: require("../../assets/images/miniaturas/3.jpg") },
+  { indice: 4, ruta: require("../../assets/images/miniaturas/4.jpg") },
+  { indice: 5, ruta: require("../../assets/images/miniaturas/5.jpg") },
+  { indice: 6, ruta: require("../../assets/images/miniaturas/6.jpg") },
+  { indice: 7, ruta: require("../../assets/images/miniaturas/7.jpg") },
+  { indice: 8, ruta: require("../../assets/images/miniaturas/8.jpg") },
+  { indice: 9, ruta: require("../../assets/images/miniaturas/9.jpg") },
+  { indice: 10, ruta: require("../../assets/images/miniaturas/10.jpg") },
+  { indice: 11, ruta: require("../../assets/images/miniaturas/11.jpg") },
+  { indice: 12, ruta: require("../../assets/images/miniaturas/12.jpg") },
+  { indice: 13, ruta: require("../../assets/images/miniaturas/13.jpg") },
+  { indice: 14, ruta: require("../../assets/images/miniaturas/14.jpg") },
+  { indice: 15, ruta: require("../../assets/images/miniaturas/15.jpg") },
+  { indice: 16, ruta: require("../../assets/images/miniaturas/16.jpg") },
+  { indice: 17, ruta: require("../../assets/images/miniaturas/17.jpg") },
+  { indice: 18, ruta: require("../../assets/images/miniaturas/18.jpg") },
+  { indice: 19, ruta: require("../../assets/images/miniaturas/19.jpg") },
+  { indice: 20, ruta: require("../../assets/images/miniaturas/20.jpg") },
+  { indice: 21, ruta: require("../../assets/images/miniaturas/21.jpg") },
 ];
-images.sort(() => Math.random() - 0.5);
 
 const { width, height } = Dimensions.get("window");
 
@@ -49,12 +49,12 @@ const Tirada = () => {
   const [count, setCount] = useState(0);
   const [isButtonEnabled, setButtonEnabled] = useState(true);
   const [IsShuffling, setShuffling] = useState(false);
-
-  const cards = new Array(22).fill(null).map(() => ({
+  const cards = new Array(22).fill(null).map((_, index) => ({
     translateY: useSharedValue(0),
     translateX: useSharedValue(0),
     rotation: useSharedValue(0),
     zIndex: useSharedValue(0),
+    arcaneNumber: images[index].indice,
   }));
 
   const deselectAllCards = () => {
@@ -68,6 +68,7 @@ const Tirada = () => {
     setShuffling(true);
     deselectAllCards();
     images.sort(() => Math.random() - 0.5);
+
     const wait = (ms: number) =>
       new Promise((resolve) => setTimeout(resolve, ms));
     // Paso 1: Mezcla inicial aleatoria de las cartas en X e Y
@@ -75,7 +76,6 @@ const Tirada = () => {
       const randomX = Math.random() * 200 - 100; // Movimiento aleatorio en X
       const randomY = Math.random() * 200 - 100; // Movimiento aleatorio en Y
       const randomRotation = Math.random() * 360; // Rotación aleatoria para más variabilidad
-
       card.translateX.value = withTiming(randomX, { duration: 300 });
       card.translateY.value = withTiming(randomY, { duration: 300 });
       card.rotation.value = withTiming(randomRotation, { duration: 300 });
@@ -89,7 +89,6 @@ const Tirada = () => {
         card.translateX.value = withTiming(Math.random() * 50 - 25, {
           duration: 300,
         });
-
         // Retornar estas cartas al fondo del mazo
         setTimeout(
           () => {
@@ -139,7 +138,6 @@ const Tirada = () => {
         const centerY = height / 17; // Posición central en Y, un poco hacia abajo para la forma de sonrisa
         const radius = 200; // Radio del círculo
         const totalCards = cards.length;
-
         const angle = (index / totalCards / 2) * Math.PI; // Distribución semicircular
         const x = centerX + radius * Math.cos(angle) - 150; // Ajustar para centrar
         const y = centerY + radius * Math.sin(angle) - 180; // Ajustar para centrar
@@ -165,6 +163,17 @@ const Tirada = () => {
         });
       }
     });
+    let result: number[] = [];
+    images.forEach((_, index) => {
+      if (selectedCards[index] === true) {
+        result.push(images[index].indice);
+      }
+    });
+    //Se modifica el orden de las cartas seleccionadas, debido a que se obtienen invertidas, finalmente el ultimo elemento del array que sirve de memoria
+    result[3] = result[0];
+    result[0] = result[2];
+    result[2] = result[3];
+    result.pop();
 
     const baseX = 130; // Punto inicial en X
     const spacing = 120; // Espaciado entre las cartas
@@ -181,17 +190,17 @@ const Tirada = () => {
           card.translateY.value = withTiming(revealY, { duration: 500 }); // Movimiento en Y
         }, 1500);
         selectedIndex--; // Decrecentar índice para la próxima carta seleccionada
-        toggleFlip();
+        toggleFlip(result);
       }
     });
   };
 
   const [isFlipped, setIsFlipped] = useState(false);
 
-  const toggleFlip = () => {
+  const toggleFlip = (result: number[]) => {
     setIsFlipped(!isFlipped);
+    return <Lectura numbers={result} />;
   };
-
   const [isButtonActiveStyle, setisButtonActiveStyle] = useState<any[]>([
     "#4c669f",
     "#3b5998",
@@ -279,7 +288,7 @@ const Tirada = () => {
               </Pressable>
               <Pressable onPress={selectCardHandler}>
                 <Image
-                  source={images[index]}
+                  source={images[index].ruta}
                   contentFit="cover"
                   style={[styles.image, cardStyle[index]]}
                 />
