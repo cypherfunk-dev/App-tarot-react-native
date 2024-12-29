@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CardBack from "../assets/images/miniaturas/back.jpg";
 import { Image } from "expo-image";
@@ -10,6 +10,8 @@ import Animated, {
 } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
 import FlipCard from "react-native-flip-card";
+import { ApplicationContext } from "../app/(tabs)/_layout";
+
 const images = [
   { indice: 0, ruta: require("../assets/images/miniaturas/0.jpg") },
   { indice: 1, ruta: require("../assets/images/miniaturas/1.jpg") },
@@ -38,10 +40,8 @@ const images = [
 const { width, height } = Dimensions.get("window");
 
 const TiradaSeleccion = () => {
-  const [isLectura, setIsLectura] = useState(false);
-
   const [selectedCards, setSelectedCards] = useState<boolean[]>(
-    new Array(22).fill(false),
+    new Array(22).fill(false)
   );
   const [cardStyle, setCardStyle] = useState<any[]>(
     new Array(22).fill({ borderWidth: 0 })
@@ -65,6 +65,14 @@ const TiradaSeleccion = () => {
     zIndex: useSharedValue(0),
     arcaneNumber: images[index].indice,
   }));
+  // Inicializacion de contexto
+  const context = useContext(ApplicationContext);
+
+  if (!context) {
+    throw new Error("ApplicationContext no está disponible.");
+  }
+
+  const { isLectura, setIsLectura } = context;
 
   const shuffleCards = async () => {
     if (isShuffling) return;
@@ -99,7 +107,7 @@ const TiradaSeleccion = () => {
             card.translateX.value = withTiming(0, { duration: 300 });
             card.zIndex.value = -99;
           },
-          800 + idx * 100,
+          800 + idx * 100
         ); // Delay escalonado para efecto de bajada
       });
     }, 800);
@@ -122,7 +130,7 @@ const TiradaSeleccion = () => {
             card.translateX.value = withTiming(0, { duration: 300 });
             card.zIndex.value = -99;
           },
-          1000 + idx * 100,
+          1000 + idx * 100
         ); // Delay escalonado para efecto de bajada
       });
     }, 1300);
@@ -236,7 +244,7 @@ const TiradaSeleccion = () => {
           card.zIndex.value = 0; // Asegura que el orden visual sea correcto
         }
       });
-    }, 2500);
+    }, 5000);
     setIsOver(true);
   };
 
@@ -253,7 +261,9 @@ const TiradaSeleccion = () => {
   // Delay para mostrar la lectura
   useEffect(() => {
     if (isOver) {
-      setIsLectura(true);
+      setTimeout(() => {
+        setIsLectura(true);
+      }, 5000);
     }
   }, [isOver]);
 

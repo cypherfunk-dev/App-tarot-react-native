@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
+import { ApplicationContext } from "../../app/(tabs)/_layout";
 import Lectura from "../../components/Lectura";
 import TiradaSeleccion from "../../components/TiradaSeleccion";
 
 const Tirada = () => {
-  const [islectura, setIsLectura] = useState(false);
+  const context = useContext(ApplicationContext);
 
-  useEffect(() => {
-    // Example: setLectura based on some condition or event
-    const timer = setTimeout(() => setIsLectura(true), 3000);
-    return () => clearTimeout(timer);
-  }, []);
-  if (islectura) {
+  if (!context) {
+    throw new Error("ApplicationContext no está disponible.");
+  }
+
+  const { isLectura } = context;
+
+  if (isLectura) {
     return <Lectura />;
   } else {
     return <TiradaSeleccion />;
