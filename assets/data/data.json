@@ -1,0 +1,156 @@
+[
+    {
+        "id": 0,
+        "nombre": "El Loco",
+        "descripcion": "Representa la libertad, la espontaneidad y la aventura.",
+        "palabras_clave": ["libertad", "espontaneidad", "aventura"],
+        "imagen": "0.jpg"
+    },
+    {
+        "id": 1,
+        "nombre": "El Mago",
+        "descripcion": "Representa el poder de la voluntad y la habilidad para manifestar deseos.",
+        "palabras_clave": ["voluntad", "manifestación", "habilidad"],
+        "imagen": "1.jpg"
+    },
+    {
+        "id": 2,
+        "nombre": "La Sacerdotisa",
+        "descripcion": "Simboliza la intuición, el conocimiento oculto y la sabiduría interior.",
+        "palabras_clave": ["intuición", "sabiduría", "conocimiento"],
+        "imagen": "2.jpg"
+    },
+    {
+        "id": 3,
+        "nombre": "La Emperatriz",
+        "descripcion": "Representa la fertilidad, la abundancia y la creatividad.",
+        "palabras_clave": ["fertilidad", "abundancia", "creatividad"],
+        "imagen": "3.jpg"
+    },
+    {
+        "id": 4,
+        "nombre": "El Emperador",
+        "descripcion": "Simboliza la autoridad, el control y la estructura.",
+        "palabras_clave": ["autoridad", "control", "estructura"],
+        "imagen": "4.jpg"
+    },
+    {
+        "id": 5,
+        "nombre": "El Hierofante",
+        "descripcion": "Representa la tradición, la religión y la enseñanza.",
+        "palabras_clave": ["tradición", "religión", "enseñanza"],
+        "imagen": "5.jpg"
+    },
+    {
+        "id": 6,
+        "nombre": "Los Enamorados",
+        "descripcion": "Simboliza el amor, la unión y las decisiones importantes.",
+        "palabras_clave": ["amor", "unión", "decisiones"],
+        "imagen": "6.jpg"
+    },
+    {
+        "id": 7,
+        "nombre": "El Carro",
+        "descripcion": "Representa la victoria, la determinación y el control.",
+        "palabras_clave": ["victoria", "determinación", "control"],
+        "imagen": "7.jpg"
+    },
+    {
+        "id": 8,
+        "nombre": "La Justicia",
+        "descripcion": "Simboliza la justicia, el equilibrio y la verdad.",
+        "palabras_clave": ["justicia", "equilibrio", "verdad"],
+        "imagen": "8.jpg"
+    },
+    {
+        "id": 9,
+        "nombre": "El Ermitaño",
+        "descripcion": "Representa la introspección, la soledad y la búsqueda de la verdad.",
+        "palabras_clave": ["introspección", "soledad", "búsqueda"],
+        "imagen": "9.jpg"
+    },
+    {
+        "id": 10,
+        "nombre": "La Rueda de la Fortuna",
+        "descripcion": "Simboliza el cambio, el destino y los ciclos de la vida.",
+        "palabras_clave": ["cambio", "destino", "ciclos"],
+        "imagen": "10.jpg"
+    },
+    {
+        "id": 11,
+        "nombre": "La Fuerza",
+        "descripcion": "Representa la fuerza interior, el coraje y la compasión.",
+        "palabras_clave": ["fuerza", "coraje", "compasión"],
+        "imagen": "11.jpg"
+    },
+    {
+        "id": 12,
+        "nombre": "El Colgado",
+        "descripcion": "Simboliza el sacrificio, la suspensión y la nueva perspectiva.",
+        "palabras_clave": ["sacrificio", "suspensión", "perspectiva"],
+        "imagen": "12.jpg"
+    },
+    {
+        "id": 13,
+        "nombre": "La Muerte",
+        "descripcion": "Representa la transformación, el fin y el nuevo comienzo.",
+        "palabras_clave": ["transformación", "fin", "comienzo"],
+        "imagen": "13.jpg"
+    },
+    {
+        "id": 14,
+        "nombre": "La Templanza",
+        "descripcion": "Simboliza la moderación, la paciencia y el equilibrio.",
+        "palabras_clave": ["moderación", "paciencia", "equilibrio"],
+        "imagen": "14.jpg"
+    },
+    {
+        "id": 15,
+        "nombre": "El Diablo",
+        "descripcion": "Representa la tentación, el materialismo y las ataduras.",
+        "palabras_clave": ["tentación", "materialismo", "ataduras"],
+        "imagen": "15.jpg"
+    },
+    {
+        "id": 16,
+        "nombre": "La Torre",
+        "descripcion": "Simboliza la destrucción, la revelación y el cambio repentino.",
+        "palabras_clave": ["destrucción", "revelación", "cambio"],
+        "imagen": "16.jpg"
+    },
+    {
+        "id": 17,
+        "nombre": "La Estrella",
+        "descripcion": "Representa la esperanza, la inspiración y la serenidad.",
+        "palabras_clave": ["esperanza", "inspiración", "serenidad"],
+        "imagen": "17.jpg"
+    },
+    {
+        "id": 18,
+        "nombre": "La Luna",
+        "descripcion": "Simboliza la ilusión, el subconsciente y los sueños.",
+        "palabras_clave": ["ilusión", "subconsciente", "sueños"],
+        "imagen": "18.jpg"
+    },
+    {
+        "id": 19,
+        "nombre": "El Sol",
+        "descripcion": "Representa la felicidad, el éxito y la vitalidad.",
+        "palabras_clave": ["felicidad", "éxito", "vitalidad"],
+        "imagen": "19.jpg"
+    },
+    {
+        "id": 20,
+        "nombre": "El Juicio",
+        "descripcion": "Simboliza el juicio, la renovación y la liberación.",
+        "palabras_clave": ["juicio", "renovación", "liberación"],
+        "imagen": "20.jpg"
+    },
+    {
+        "id": 21,
+        "nombre": "El Mundo",
+        "descripcion": "Representa la culminación, la realización y la integración.",
+        "palabras_clave": ["culminación", "realización", "integración"],
+        "imagen": "21.jpg"
+    }
+]

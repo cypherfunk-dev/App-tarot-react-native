@@ -73,6 +73,7 @@ const TiradaSeleccion = () => {
   }
 
   const { isLectura, setIsLectura } = context;
+  const { isResultado, setIsResultado } = context;
 
   const shuffleCards = async () => {
     if (isShuffling) return;
@@ -173,7 +174,6 @@ const TiradaSeleccion = () => {
     setIsFlipped(!isFlipped);
   };
   const revealCards = async () => {
-    console.log(isLectura);
     // Elevar cartas no seleccionadas
     cards.forEach((card, index) => {
       if (!selectedCards[index]) {
@@ -193,7 +193,7 @@ const TiradaSeleccion = () => {
     result[0] = result[2];
     result[2] = result[3];
     result.pop();
-
+    setIsResultado(result);
     const baseX = 130; // Punto inicial en X
     const spacing = 120; // Espaciado entre las cartas
     const revealY = 50; // Posición fija en Y

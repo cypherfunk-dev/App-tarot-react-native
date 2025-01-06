@@ -8,17 +8,20 @@ export const ApplicationContext = createContext<
   | {
       isLectura: boolean;
       setIsLectura: React.Dispatch<React.SetStateAction<boolean>>;
+      isResultado: number[];
+      setIsResultado: React.Dispatch<React.SetStateAction<number[]>>;
     }
   | undefined
 >(undefined);
 
 const TabLayout = () => {
   const [isLectura, setIsLectura] = useState(false);
+  const [isResultado, setIsResultado] = useState<number[]>([]);
   const colorScheme = useColorScheme();
 
   const contextValue = useMemo(
-    () => ({ isLectura, setIsLectura }),
-    [isLectura, setIsLectura],
+    () => ({ isLectura, setIsLectura, isResultado, setIsResultado }),
+    [isLectura, setIsLectura, isResultado, setIsResultado],
   );
 
   return (
