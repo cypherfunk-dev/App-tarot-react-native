@@ -27,7 +27,7 @@ const Lectura = () => {
       orientation={"horizontal"}
     >
       {image.map((item, index) => (
-        <View key={index + 1} style={styles.page1}>
+        <View key={index + 1} style={styles[`page${index + 1}`]}>
           <Text style={styles.Tittle}>{item.nombre}</Text>
           <Image source={item.image} style={styles.image} />
           <BlurView intensity={100} style={styles.cuadrotexto}>
