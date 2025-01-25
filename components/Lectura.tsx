@@ -20,6 +20,10 @@ const Lectura = () => {
   loadConfigFromAssets();
   // filtra en base a el resultado
   const image = images.filter((_, index) => isResultado.includes(index));
+  image[3] = image[0];
+  image[0] = image[2];
+  image[2] = image[3];
+  image.pop();
   return (
     <PagerView
       style={styles.container}
@@ -35,6 +39,7 @@ const Lectura = () => {
           </BlurView>
         </View>
       ))}
+
     </PagerView>
   );
 };

@@ -188,6 +188,7 @@ const TiradaSeleccion = () => {
         result.push(images[index].indice);
       }
     });
+    
     //Se modifica el orden de las cartas seleccionadas, debido a que se obtienen invertidas, finalmente el ultimo elemento del array que sirve de memoria
     result[3] = result[0];
     result[0] = result[2];
