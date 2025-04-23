@@ -6,12 +6,11 @@ import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "95%",
+    height: "100%",
     aspectRatio: 1,
   },
   imge: {
-    width: "80%",
-    height: "80%",
+    height: "100%",
   },
   botoncontainer: {
     flexDirection: "row",

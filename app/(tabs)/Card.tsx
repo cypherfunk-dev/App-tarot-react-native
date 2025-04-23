@@ -8,29 +8,38 @@ import {
 } from "react-native-safe-area-context";
 import { Canvas } from "@react-three/fiber/native";
 import { OrbitControls, Stars } from "@react-three/drei";
-import sacerModel from "../../assets/models/sacer.glb";
+// archivos de bases de datos
+import data from "../../data/arcanes.json";
+import models from "../../data/models";
+
 import Loader from "@/components/Loader";
 import Trigger from "@/components/Trigger";
 import BotonNavModelo from "../../components/vistaArcano/BotonNavModelo"; // Importa tu componente de navegación
 import { Info } from "../../components/vistaArcano/Info";
 import Mazos from "../../components/vistaArcano/Mazos";
 import Correspondencias from "../../components/vistaArcano/Correspondencias";
+import ChatScreen from "../../components/vistaArcano/Chatscreen";
 
-export const Card = () => {
+export const Card = (arcane) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [active, setActive] = useState<string>("");
   const insets = useSafeAreaInsets();
-
+  const selectedmodel = data[arcane.arcane].modelo;
+  const modelonmemory = Array.isArray(models[selectedmodel])
+    ? models[selectedmodel][0]
+    : models[selectedmodel];
   const renderActiveComponent = () => {
     switch (active) {
       case "Info":
-        return <Info />; // Renderiza el componente Info
+        return <Info arcane={arcane.arcane} />; // Renderiza el componente Info
       case "Data":
-        return <Correspondencias />; // Renderiza el componente Data
+        return <Correspondencias arcane={arcane.arcane} />; // Renderiza el componente Data
       case "Decks":
         return <Mazos />; // Renderiza el componente Decks
+      case "Chat":
+        return <ChatScreen />; // Renderiza el componente Chat
       default:
-        return <Info />; // Renderiza el componente Info por defecto
+        return <Info arcane={arcane.arcane} />; // Renderiza el componente Info por defecto
     }
   };
 
@@ -89,7 +98,7 @@ export const Card = () => {
             /> */}
             <Suspense fallback={<Trigger setLoading={setLoading} />}>
               <group>
-                <Gltf src={sacerModel} scale={3} />
+                <Gltf src={modelonmemory} scale={3} />
               </group>
             </Suspense>
           </Canvas>

@@ -30,6 +30,7 @@ const BotonNavModelo = ({ setActiveComponent }) => {
           <Text style={styles.buttonText}>Data</Text>
         </View>
       </Pressable>
+
       <Pressable
         style={({ pressed }) => [
           styles.button,
@@ -42,6 +43,21 @@ const BotonNavModelo = ({ setActiveComponent }) => {
           <Text style={styles.buttonText}>Decks</Text>
         </View>
       </Pressable>
+
+      <Pressable
+        style={({ pressed }) => [
+          styles.button,
+          { backgroundColor: pressed ? "#DDDDDD" : "transparent" },
+        ]}
+        onPress={() => setActiveComponent("Chat")}
+      >
+        <View style={styles.buttonContent}>
+          <Icon name="comment" size={20} color="#000" />
+          <Text style={styles.buttonText}>Talk with Arcane</Text>
+        </View>
+      </Pressable>
+
+
     </View>
   );
 };

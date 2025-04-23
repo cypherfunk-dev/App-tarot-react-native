@@ -1,42 +1,34 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
+import data from "../../data/arcanes.json";
+interface CorrespondenciasProps {
+  arcane: any; // Replace 'any' with the appropriate type if known
+}
 
-const Correspondencias: React.FC = () => {
-  const rows = [
-    { key: "1", title: "Mago", description: "Ingenioso" },
-    { key: "2", title: "La alta sacerdotisa", description: "Erudita" },
-    { key: "3", title: "Mago", description: "Ingenioso" },
-    { key: "4", title: "La alta sacerdotisa", description: "Erudita" },
-    { key: "5", title: "Mago", description: "Ingenioso" },
-    { key: "6", title: "La alta sacerdotisa", description: "Erudita" },
-    { key: "7", title: "Mago", description: "Ingenioso" },
-    { key: "8", title: "La alta sacerdotisa", description: "Erudita" },
-    { key: "9", title: "Mago", description: "Ingenioso" },
-    { key: "10", title: "La alta sacerdotisa", description: "Erudita" },
-    { key: "11", title: "Mago", description: "Ingenioso" },
-    { key: "12", title: "La alta sacerdotisa", description: "Erudita" },
-    { key: "13", title: "Mago", description: "Ingenioso" },
-    { key: "14", title: "La alta sacerdotisa", description: "Erudita" },
-  ];
-
+const Correspondencias: React.FC<CorrespondenciasProps> = ({ arcane }) => {
+  const arcaneinfo = data[arcane].correspondencias;
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.table}>
         <View style={styles.tableHeader}>
           <Text style={styles.tableHeaderText}>Correspondencias</Text>
         </View>
-        {rows.map((row, index) => (
-          <View
-            key={row.key}
-            style={[
-              styles.tableRow,
-              index % 2 === 0 ? styles.tableRowEven : styles.tableRowOdd,
-            ]}
-          >
-            <Text style={styles.tableCell}>{row.title}</Text>
-            <Text style={styles.tableCell}>{row.description}</Text>
-          </View>
-        ))}
+        {arcaneinfo.map((info, index) => {
+          const key = Object.keys(info)[0];
+          const value = info[key];
+          return (
+            <View
+              key={index}
+              style={[
+                styles.tableRow,
+                index % 2 === 0 ? styles.tableRowEven : styles.tableRowOdd,
+              ]}
+            >
+              <Text style={styles.tableCell}>{key}</Text>
+              <Text style={styles.tableCell}>{value}</Text>
+            </View>
+          );
+        })}
       </View>
     </ScrollView>
   );

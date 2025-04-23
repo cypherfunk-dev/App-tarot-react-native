@@ -1,0 +1,26 @@
+const modelos: Record<string, string[]> = {
+  // loco: require ("../../assets/loco.png"),
+  // mago: require ("../../assets/mago.png"),
+  sacer: require("../assets/models/sacer.glb"),
+  // emperatriz: require ("../../assets/emperatriz.glb"),
+  // emperador: require ("../../assets/emperador.glb"),
+  // papa: require ("../../assets/papa.glb"),
+  // enamorados: require ("../../assets/enamorados.glb"),
+  // carro: require ("../../assets/carro.glb"),
+  // fuerza: require ("../../assets/fuerza.glb"),
+  ermita: require("../assets/models/hermit.glb"),
+  // rueda: require ("../../assets/rueda.glb"),
+  // justicia: require ("../../assets/justicia.glb"),
+  // colgado: require ("../../assets/colgado.glb"),
+  muerte: require("../assets/models/death.glb"),
+  // templanza: require ("../../assets/templanza.glb"),
+  // diablo: require ("../../assets/diablo.glb"),
+  torre: require("../assets/models/tower.glb"),
+  // estrella: require ("../../assets/estrella.glb"),
+  // luna: require ("../../assets/luna.glb"),
+  // sol: require ("../../assets/sol.glb"),
+  juicio: require("../assets/models/judgement.glb"),
+  // mundo: require ("../../assets/mundo.glb"),
+};
+
+export default modelos;

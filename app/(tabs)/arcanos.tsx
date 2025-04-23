@@ -32,8 +32,9 @@ const images = [
 
 const Arcanos: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
-
-  const handlePress = () => {
+  const [card, setCard] = useState(0); // Estado para almacenar el índice del arcano seleccionado
+  const handlePress = (selectedCard: number) => {
+    setCard(selectedCard); // Establecer el índice del arcano seleccionado
     setModalVisible(true); // Mostrar el modal al presionar
   };
 
@@ -41,12 +42,12 @@ const Arcanos: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.grid}>
-          {Array.from({ length: 22 }).map((_, index) => (
-            <View key={index} style={styles.square}>
+          {images.map((image, index) => (
+            <View key={image} style={styles.square}>
               <Pressable
                 style={styles.pressable}
                 onPress={() => {
-                  handlePress();
+                  handlePress(index);
                 }}
               >
                 <Image
@@ -66,7 +67,7 @@ const Arcanos: React.FC = () => {
         onRequestClose={() => setModalVisible(false)}
       >
         <Suspense fallback={<Text>Loading...</Text>}>
-          <Card />
+          <Card arcane={card} />
         </Suspense>
       </Modal>
     </SafeAreaView>
