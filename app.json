@@ -1,12 +1,13 @@
 {
   "expo": {
-    "name": "inspira",
-    "slug": "inspira",
+    "name": "arcania",
+    "slug": "arcania",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "arcania",
     "userInterfaceStyle": "automatic",
+     "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
