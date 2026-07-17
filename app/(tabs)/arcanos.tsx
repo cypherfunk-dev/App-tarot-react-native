@@ -1,15 +1,23 @@
 import React, { useState, Suspense } from "react";
-import { View, StyleSheet, Text, Modal, Pressable, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Modal,
+  Pressable,
+  ScrollView,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import { Card } from "../../components/vistaArcano/Card";
 import { arcanos } from "../../data/arcanos";
-
-const images = arcanos.map((arcano) => arcano.miniatura);
+import { usePlayerStore, estrellasVinculo } from "../../stores/playerStore";
 
 const Arcanos: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [card, setCard] = useState(0); // Estado para almacenar el índice del arcano seleccionado
+  const vinculos = usePlayerStore((s) => s.vinculos);
+
   const handlePress = (selectedCard: number) => {
     setCard(selectedCard); // Establecer el índice del arcano seleccionado
     setModalVisible(true); // Mostrar el modal al presionar
@@ -17,25 +25,36 @@ const Arcanos: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.titulo}>Grimorio</Text>
       <ScrollView>
         <View style={styles.grid}>
-          {images.map((image, index) => (
-            <View key={image} style={styles.square}>
-              <Pressable
-                style={styles.pressable}
-                onPress={() => {
-                  handlePress(index);
-                }}
-              >
-                <Image
-                  style={styles.image}
-                  source={images[index]} // Usar el índice para obtener la imagen
-                  contentFit="cover"
-                  transition={1000}
-                />
-              </Pressable>
-            </View>
-          ))}
+          {arcanos.map((arcano) => {
+            const puntos = vinculos[arcano.numero] ?? 0;
+            const estrellas = estrellasVinculo(puntos);
+            const dormido = puntos === 0;
+            return (
+              <View key={arcano.numero} style={styles.square}>
+                <Pressable
+                  style={styles.pressable}
+                  onPress={() => handlePress(arcano.numero)}
+                >
+                  <Image
+                    style={[styles.image, dormido && styles.imageDormida]}
+                    source={arcano.miniatura}
+                    contentFit="cover"
+                    transition={1000}
+                  />
+                  {dormido ? (
+                    <Text style={styles.badgeDormido}>💤</Text>
+                  ) : (
+                    <Text style={styles.badgeEstrellas}>
+                      {"★".repeat(Math.max(estrellas, 1))}
+                    </Text>
+                  )}
+                </Pressable>
+              </View>
+            );
+          })}
         </View>
       </ScrollView>
       <Modal
@@ -59,13 +78,11 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     backgroundColor: "black",
   },
-  buttonContainer: {
-    position: "absolute",
-    top: 50,
-    left: 180,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: 100,
+  titulo: {
+    color: "#f0e6d2",
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
   },
   grid: {
     flexDirection: "row",
@@ -76,7 +93,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 150,
     margin: 2,
-    backgroundColor: "lightgray",
+    backgroundColor: "#1a1826",
   },
   pressable: {
     width: "100%",
@@ -87,6 +104,24 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: "100%",
+  },
+  imageDormida: {
+    opacity: 0.35,
+  },
+  badgeDormido: {
+    position: "absolute",
+    bottom: 4,
+    right: 6,
+    fontSize: 14,
+  },
+  badgeEstrellas: {
+    position: "absolute",
+    bottom: 4,
+    right: 6,
+    color: "#ffd700",
+    fontSize: 12,
+    textShadowColor: "black",
+    textShadowRadius: 3,
   },
 });
 

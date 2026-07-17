@@ -16,10 +16,10 @@ const TabLayout = () => {
         <Tabs.Screen
           name="index"
           options={{
-            title: "Home",
+            title: "Hoy",
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon
-                name={focused ? "home" : "home-outline"}
+                name={focused ? "sparkles" : "sparkles-outline"}
                 color={color}
               />
             ),
@@ -28,7 +28,7 @@ const TabLayout = () => {
         <Tabs.Screen
           name="arcanos"
           options={{
-            title: "Arcanos",
+            title: "Grimorio",
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon
                 name={focused ? "book" : "book-outline"}
@@ -50,12 +50,12 @@ const TabLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="explorar"
+          name="diario"
           options={{
-            title: "Explorar",
+            title: "Diario",
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon
-                name={focused ? "compass" : "compass-outline"}
+                name={focused ? "journal" : "journal-outline"}
                 color={color}
               />
             ),

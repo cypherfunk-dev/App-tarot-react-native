@@ -6,21 +6,23 @@
 
 ---
 
-## Fase 0 — Cimientos 🔧
+## Fase 0 — Cimientos 🔧 ✅
 
-- [ ] Unificar datos en `data/arcanos.ts` (única fuente tipada: nombre, descripción, palabras clave, correspondencias, modelo 3D, miniatura, personalidad)
-- [ ] Migrar estado de `ApplicationContext` a **zustand**
-- [ ] Persistencia con AsyncStorage (zustand `persist`)
-- [ ] Webhook de n8n a variable de entorno (`EXPO_PUBLIC_N8N_CHAT_URL`)
+- [x] Unificar datos en `data/arcanos.ts` (única fuente tipada: nombre, descripción, palabras clave, correspondencias, modelo 3D, miniatura, personalidad)
+- [x] Migrar estado de `ApplicationContext` a **zustand**
+- [x] Persistencia con AsyncStorage (zustand `persist`)
+- [x] Webhook de n8n a variable de entorno (`EXPO_PUBLIC_N8N_CHAT_URL`)
 
 ## Fase 1 — Loop RPG mínimo 🎮
 
-- [ ] **Carta del día**: un arcano te recibe al abrir la app, con mensaje + micro-reto
-- [ ] **XP y niveles** (iniciado → adepto → oráculo…)
-- [ ] **Racha diaria** con recompensa creciente
-- [ ] **Diario del viajero**: journaling tras cada tirada, historial navegable por fecha/carta
-- [ ] **Grimorio**: arcanos "dormidos" que se despiertan al encontrarlos; nivel de vínculo (1-5⭐) por arcano
-- [ ] Reorganizar tabs: `Hoy` / `Grimorio` / `Tirada` / `Diario` (Explorar se absorbe en Grimorio)
+- [x] **Carta del día**: un arcano te recibe al abrir la app, con reto + bendición diaria (+XP, una vez al día)
+- [x] **XP y niveles** (Iniciado → Aprendiz → Adepto → Vidente → Oráculo)
+- [x] **Racha diaria** (contador; recompensa creciente pendiente)
+- [x] **Diario del viajero**: reflexión al final de cada lectura (+XP), historial navegable por fecha/carta
+- [x] **Grimorio**: arcanos "dormidos" que se despiertan al encontrarlos; vínculo (1-5⭐) por arcano
+- [x] Reorganizar tabs: `Hoy` / `Grimorio` / `Tirada` / `Diario` (Explorar eliminado)
+- [ ] Recompensa creciente por racha (multiplicador de XP)
+- [ ] Pulido visual: barra de progreso de XP, animación al ganar XP/vínculo
 
 ## Fase 2 — Chat con alma 💬
 
