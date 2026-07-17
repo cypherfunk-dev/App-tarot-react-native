@@ -1,12 +1,19 @@
 import { View, Text, StyleSheet } from "react-native";
-import data from "../../data/arcanes.json";
+import { getArcano } from "../../data/arcanos";
 
-export const Info = (arcane) => {
-  const arcaneData = data[arcane.arcane];
+interface InfoProps {
+  arcane: number;
+}
+
+export const Info = ({ arcane }: InfoProps) => {
+  const arcano = getArcano(arcane);
   return (
     <View style={styles.textContainer}>
-      <Text className="p-4 text-center text-2xl">{arcaneData.nombre}</Text>
-      <Text className="p-4 text-xl">{arcaneData.descripcion}</Text>
+      <Text className="p-4 text-center text-2xl">{arcano.nombre}</Text>
+      <Text className="p-4 text-xl">{arcano.descripcion}</Text>
+      <Text className="p-4 text-center text-base italic">
+        {arcano.palabrasClave.join(" · ")}
+      </Text>
     </View>
   );
 };
@@ -20,18 +27,3 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
 });
-//   textTitle: {
-//     padding: 30,
-//     fontFamily: "Inter-Bold",
-//     fontSize: 24,
-//     color: "black",
-//     textAlign: "center",
-//   },
-//   text: {
-//     textAlign: "left",
-//     fontFamily: "Inter-Light",
-//     fontSize: 21,
-//     color: "black",
-//     lineHeight: 25,
-//   },
-// });

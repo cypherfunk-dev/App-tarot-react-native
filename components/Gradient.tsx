@@ -21,7 +21,7 @@ const Gradient = () => {
 
   return (
     <Canvas
-      style={StyleSheet.absoluteFillObject}
+      style={StyleSheet.absoluteFill}
       onLayout={(e) => {
         setWidth(e.nativeEvent.layout.width);
         setHeight(e.nativeEvent.layout.height);

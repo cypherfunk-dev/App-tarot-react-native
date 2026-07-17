@@ -1,34 +1,11 @@
 import React, { useState, Suspense } from "react";
-import { View, StyleSheet, Text, Modal, Pressable } from "react-native";
-import { ScrollView } from "react-native";
+import { View, StyleSheet, Text, Modal, Pressable, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
-import { Card } from "./Card";
+import { Card } from "../../components/vistaArcano/Card";
+import { arcanos } from "../../data/arcanos";
 
-const images = [
-  require("../../assets/images/miniaturas/0.jpg"),
-  require("../../assets/images/miniaturas/1.jpg"),
-  require("../../assets/images/miniaturas/2.jpg"),
-  require("../../assets/images/miniaturas/3.jpg"),
-  require("../../assets/images/miniaturas/4.jpg"),
-  require("../../assets/images/miniaturas/5.jpg"),
-  require("../../assets/images/miniaturas/6.jpg"),
-  require("../../assets/images/miniaturas/7.jpg"),
-  require("../../assets/images/miniaturas/8.jpg"),
-  require("../../assets/images/miniaturas/9.jpg"),
-  require("../../assets/images/miniaturas/10.jpg"),
-  require("../../assets/images/miniaturas/11.jpg"),
-  require("../../assets/images/miniaturas/12.jpg"),
-  require("../../assets/images/miniaturas/13.jpg"),
-  require("../../assets/images/miniaturas/14.jpg"),
-  require("../../assets/images/miniaturas/15.jpg"),
-  require("../../assets/images/miniaturas/16.jpg"),
-  require("../../assets/images/miniaturas/17.jpg"),
-  require("../../assets/images/miniaturas/18.jpg"),
-  require("../../assets/images/miniaturas/19.jpg"),
-  require("../../assets/images/miniaturas/20.jpg"),
-  require("../../assets/images/miniaturas/21.jpg"),
-];
+const images = arcanos.map((arcano) => arcano.miniatura);
 
 const Arcanos: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);

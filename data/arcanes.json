@@ -4,18 +4,47 @@
     "nombre": "El Loco",
     "descripcion": "El Loco simboliza el inicio del viaje espiritual, la libertad, la inocencia y la confianza ciega en el universo. Representa el impulso de explorar lo desconocido.",
     "modelo": "loco",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Planeta": "Urano" },
-      { "Elemento": "Aire" },
-      { "Letra Hebrea": "Aleph" },
-      { "Número": "0" },
-      { "Color": "Amarillo" },
-      { "Animal": "Perro" },
-      { "Sentido": "Oído" },
-      { "Significado Alquímico": "Caos Primordial" },
-      { "Arquetipo": "El Viajero" },
-      { "Valor": "Libertad" }
+      {
+        "Planeta": "Urano"
+      },
+      {
+        "Elemento": "Aire"
+      },
+      {
+        "Letra Hebrea": "Aleph"
+      },
+      {
+        "Número": "0"
+      },
+      {
+        "Color": "Amarillo"
+      },
+      {
+        "Animal": "Perro"
+      },
+      {
+        "Sentido": "Oído"
+      },
+      {
+        "Significado Alquímico": "Caos Primordial"
+      },
+      {
+        "Arquetipo": "El Viajero"
+      },
+      {
+        "Valor": "Libertad"
+      }
+    ],
+    "palabras_clave": [
+      "libertad",
+      "espontaneidad",
+      "aventura"
     ]
   },
   {
@@ -23,18 +52,47 @@
     "nombre": "El Mago",
     "descripcion": "El Mago representa el poder de manifestación, el dominio de los elementos y el canal entre el mundo espiritual y material. Es el iniciado consciente.",
     "modelo": "mago",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Planeta": "Mercurio" },
-      { "Elemento": "Aire" },
-      { "Letra Hebrea": "Beth" },
-      { "Número": "1" },
-      { "Color": "Naranja" },
-      { "Herramienta": "Varita" },
-      { "Sentido": "Vista" },
-      { "Significado Alquímico": "Mercurio" },
-      { "Arquetipo": "El Hechicero" },
-      { "Valor": "Voluntad" }
+      {
+        "Planeta": "Mercurio"
+      },
+      {
+        "Elemento": "Aire"
+      },
+      {
+        "Letra Hebrea": "Beth"
+      },
+      {
+        "Número": "1"
+      },
+      {
+        "Color": "Naranja"
+      },
+      {
+        "Herramienta": "Varita"
+      },
+      {
+        "Sentido": "Vista"
+      },
+      {
+        "Significado Alquímico": "Mercurio"
+      },
+      {
+        "Arquetipo": "El Hechicero"
+      },
+      {
+        "Valor": "Voluntad"
+      }
+    ],
+    "palabras_clave": [
+      "voluntad",
+      "manifestación",
+      "habilidad"
     ]
   },
   {
@@ -42,18 +100,47 @@
     "nombre": "La Sacerdotisa",
     "descripcion": "La Sacerdotisa representa el conocimiento intuitivo, lo oculto y lo sagrado femenino. Custodia los secretos del inconsciente y el acceso al misterio.",
     "modelo": "sacer",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Planeta": "Luna" },
-      { "Elemento": "Agua" },
-      { "Letra Hebrea": "Gimel" },
-      { "Número": "2" },
-      { "Color": "Plateado" },
-      { "Arquetipo": "La Guardiana" },
-      { "Sentido": "Intuición" },
-      { "Significado Alquímico": "Disolución" },
-      { "Símbolo": "Pergamino" },
-      { "Valor": "Sabiduría" }
+      {
+        "Planeta": "Luna"
+      },
+      {
+        "Elemento": "Agua"
+      },
+      {
+        "Letra Hebrea": "Gimel"
+      },
+      {
+        "Número": "2"
+      },
+      {
+        "Color": "Plateado"
+      },
+      {
+        "Arquetipo": "La Guardiana"
+      },
+      {
+        "Sentido": "Intuición"
+      },
+      {
+        "Significado Alquímico": "Disolución"
+      },
+      {
+        "Símbolo": "Pergamino"
+      },
+      {
+        "Valor": "Sabiduría"
+      }
+    ],
+    "palabras_clave": [
+      "intuición",
+      "sabiduría",
+      "conocimiento"
     ]
   },
   {
@@ -61,18 +148,47 @@
     "nombre": "La Emperatriz",
     "descripcion": "La Emperatriz representa la fertilidad, la madre naturaleza, el amor y la abundancia en su forma más fértil y expansiva. Es la energía creadora en acción.",
     "modelo": "emperatriz",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Planeta": "Venus" },
-      { "Elemento": "Tierra" },
-      { "Letra Hebrea": "Daleth" },
-      { "Número": "3" },
-      { "Color": "Verde" },
-      { "Símbolo": "Cetro" },
-      { "Sentido": "Tacto" },
-      { "Significado Alquímico": "Fecundación" },
-      { "Arquetipo": "La Madre" },
-      { "Valor": "Abundancia" }
+      {
+        "Planeta": "Venus"
+      },
+      {
+        "Elemento": "Tierra"
+      },
+      {
+        "Letra Hebrea": "Daleth"
+      },
+      {
+        "Número": "3"
+      },
+      {
+        "Color": "Verde"
+      },
+      {
+        "Símbolo": "Cetro"
+      },
+      {
+        "Sentido": "Tacto"
+      },
+      {
+        "Significado Alquímico": "Fecundación"
+      },
+      {
+        "Arquetipo": "La Madre"
+      },
+      {
+        "Valor": "Abundancia"
+      }
+    ],
+    "palabras_clave": [
+      "fertilidad",
+      "abundancia",
+      "creatividad"
     ]
   },
   {
@@ -80,18 +196,47 @@
     "nombre": "El Emperador",
     "descripcion": "El Emperador representa la estructura, el orden, la ley y el liderazgo. Es el principio masculino que establece límites y define la realidad material.",
     "modelo": "emperador",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Signo": "Aries" },
-      { "Elemento": "Fuego" },
-      { "Letra Hebrea": "He" },
-      { "Número": "4" },
-      { "Color": "Rojo" },
-      { "Símbolo": "Trono" },
-      { "Sentido": "Vista" },
-      { "Arquetipo": "El Padre" },
-      { "Significado Alquímico": "Solidificación" },
-      { "Valor": "Autoridad" }
+      {
+        "Signo": "Aries"
+      },
+      {
+        "Elemento": "Fuego"
+      },
+      {
+        "Letra Hebrea": "He"
+      },
+      {
+        "Número": "4"
+      },
+      {
+        "Color": "Rojo"
+      },
+      {
+        "Símbolo": "Trono"
+      },
+      {
+        "Sentido": "Vista"
+      },
+      {
+        "Arquetipo": "El Padre"
+      },
+      {
+        "Significado Alquímico": "Solidificación"
+      },
+      {
+        "Valor": "Autoridad"
+      }
+    ],
+    "palabras_clave": [
+      "autoridad",
+      "control",
+      "estructura"
     ]
   },
   {
@@ -99,18 +244,47 @@
     "nombre": "El Hierofante",
     "descripcion": "El Hierofante simboliza la tradición espiritual, la enseñanza sagrada y los rituales establecidos. Representa la búsqueda de conocimiento espiritual dentro de estructuras formales.",
     "modelo": "",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Planeta": "Venus" },
-      { "Elemento": "Tierra" },
-      { "Letra hebrea": "Vav" },
-      { "Sendero del Árbol de la Vida": "4 al 6" },
-      { "Color": "Azul celeste" },
-      { "Arcángel": "Anael" },
-      { "Metal": "Cobre" },
-      { "Chakra": "Quinto (Garganta)" },
-      { "Estación": "Primavera" },
-      { "Valor simbólico": "Tradición, sabiduría y guía espiritual" }
+      {
+        "Planeta": "Venus"
+      },
+      {
+        "Elemento": "Tierra"
+      },
+      {
+        "Letra hebrea": "Vav"
+      },
+      {
+        "Sendero del Árbol de la Vida": "4 al 6"
+      },
+      {
+        "Color": "Azul celeste"
+      },
+      {
+        "Arcángel": "Anael"
+      },
+      {
+        "Metal": "Cobre"
+      },
+      {
+        "Chakra": "Quinto (Garganta)"
+      },
+      {
+        "Estación": "Primavera"
+      },
+      {
+        "Valor simbólico": "Tradición, sabiduría y guía espiritual"
+      }
+    ],
+    "palabras_clave": [
+      "tradición",
+      "religión",
+      "enseñanza"
     ]
   },
   {
@@ -118,18 +292,47 @@
     "nombre": "Los Enamorados",
     "descripcion": "Los Enamorados representan la dualidad, la elección y la armonía. Es un arcano que habla del amor verdadero, pero también de las decisiones importantes que afectan el destino.",
     "modelo": "",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Planeta": "Mercurio" },
-      { "Elemento": "Aire" },
-      { "Letra hebrea": "Zain" },
-      { "Sendero del Árbol de la Vida": "3 al 6" },
-      { "Color": "Naranja suave" },
-      { "Arcángel": "Rafael" },
-      { "Metal": "Mercurio" },
-      { "Chakra": "Cuarto (Corazón)" },
-      { "Estación": "Primavera" },
-      { "Valor simbólico": "Elección, atracción y unificación" }
+      {
+        "Planeta": "Mercurio"
+      },
+      {
+        "Elemento": "Aire"
+      },
+      {
+        "Letra hebrea": "Zain"
+      },
+      {
+        "Sendero del Árbol de la Vida": "3 al 6"
+      },
+      {
+        "Color": "Naranja suave"
+      },
+      {
+        "Arcángel": "Rafael"
+      },
+      {
+        "Metal": "Mercurio"
+      },
+      {
+        "Chakra": "Cuarto (Corazón)"
+      },
+      {
+        "Estación": "Primavera"
+      },
+      {
+        "Valor simbólico": "Elección, atracción y unificación"
+      }
+    ],
+    "palabras_clave": [
+      "amor",
+      "unión",
+      "decisiones"
     ]
   },
   {
@@ -137,37 +340,95 @@
     "nombre": "El Carro",
     "descripcion": "El Carro simboliza la victoria, la determinación y el control del espíritu sobre las fuerzas opuestas. Es una carta de avance, éxito y disciplina personal.",
     "modelo": "",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Planeta": "Luna" },
-      { "Elemento": "Agua" },
-      { "Letra hebrea": "Chet" },
-      { "Sendero del Árbol de la Vida": "3 al 5" },
-      { "Color": "Plateado" },
-      { "Arcángel": "Gabriel" },
-      { "Metal": "Plata" },
-      { "Chakra": "Tercer chakra (Plexo solar)" },
-      { "Estación": "Verano" },
-      { "Valor simbólico": "Voluntad, dirección y triunfo" }
+      {
+        "Planeta": "Luna"
+      },
+      {
+        "Elemento": "Agua"
+      },
+      {
+        "Letra hebrea": "Chet"
+      },
+      {
+        "Sendero del Árbol de la Vida": "3 al 5"
+      },
+      {
+        "Color": "Plateado"
+      },
+      {
+        "Arcángel": "Gabriel"
+      },
+      {
+        "Metal": "Plata"
+      },
+      {
+        "Chakra": "Tercer chakra (Plexo solar)"
+      },
+      {
+        "Estación": "Verano"
+      },
+      {
+        "Valor simbólico": "Voluntad, dirección y triunfo"
+      }
+    ],
+    "palabras_clave": [
+      "victoria",
+      "determinación",
+      "control"
     ]
   },
   {
     "numero": 8,
-    "nombre": "La Fuerza",
-    "descripcion": "La Fuerza representa el coraje interior, la paciencia y el dominio de los impulsos. Habla de la suavidad que vence la dureza y del amor como poder transformador.",
+    "nombre": "La Justicia",
+    "descripcion": "La Justicia representa el equilibrio, la verdad y la responsabilidad ética. Habla de la necesidad de tomar decisiones justas y de enfrentar las consecuencias con claridad y honestidad.",
     "modelo": "",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Planeta": "Sol" },
-      { "Elemento": "Fuego" },
-      { "Letra hebrea": "Tet" },
-      { "Sendero del Árbol de la Vida": "4 al 5" },
-      { "Color": "Dorado" },
-      { "Arcángel": "Mikael" },
-      { "Metal": "Oro" },
-      { "Chakra": "Tercer chakra (Plexo solar)" },
-      { "Estación": "Verano" },
-      { "Valor simbólico": "Valor, autocontrol y pasión sublimada" }
+      {
+        "Planeta": "Venus"
+      },
+      {
+        "Elemento": "Aire"
+      },
+      {
+        "Letra hebrea": "Lamed"
+      },
+      {
+        "Sendero del Árbol de la Vida": "5 al 6"
+      },
+      {
+        "Color": "Verde esmeralda"
+      },
+      {
+        "Arcángel": "Anael"
+      },
+      {
+        "Metal": "Cobre"
+      },
+      {
+        "Chakra": "Cuarto (Corazón)"
+      },
+      {
+        "Estación": "Otoño"
+      },
+      {
+        "Valor simbólico": "Verdad, orden y juicio imparcial"
+      }
+    ],
+    "palabras_clave": [
+      "justicia",
+      "equilibrio",
+      "verdad"
     ]
   },
   {
@@ -175,18 +436,47 @@
     "nombre": "El Ermitaño",
     "descripcion": "El Ermitaño representa la búsqueda interior, la introspección y la guía espiritual. Es el sabio que se retira del mundo para encontrar la luz en la oscuridad y compartir su sabiduría con los demás.",
     "modelo": "ermita",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Planeta": "Mercurio" },
-      { "Elemento": "Tierra" },
-      { "Letra hebrea": "Yod" },
-      { "Sendero del Árbol de la Vida": "4 al 6" },
-      { "Color": "Gris" },
-      { "Arcángel": "Raziel" },
-      { "Metal": "Mercurio" },
-      { "Chakra": "Sexto (Tercer ojo)" },
-      { "Estación": "Otoño" },
-      { "Valor simbólico": "Sabiduría interior, retiro y prudencia" }
+      {
+        "Planeta": "Mercurio"
+      },
+      {
+        "Elemento": "Tierra"
+      },
+      {
+        "Letra hebrea": "Yod"
+      },
+      {
+        "Sendero del Árbol de la Vida": "4 al 6"
+      },
+      {
+        "Color": "Gris"
+      },
+      {
+        "Arcángel": "Raziel"
+      },
+      {
+        "Metal": "Mercurio"
+      },
+      {
+        "Chakra": "Sexto (Tercer ojo)"
+      },
+      {
+        "Estación": "Otoño"
+      },
+      {
+        "Valor simbólico": "Sabiduría interior, retiro y prudencia"
+      }
+    ],
+    "palabras_clave": [
+      "introspección",
+      "soledad",
+      "búsqueda"
     ]
   },
   {
@@ -194,37 +484,95 @@
     "nombre": "La Rueda de la Fortuna",
     "descripcion": "La Rueda de la Fortuna simboliza el cambio constante, los ciclos del destino y la fortuna en movimiento. Representa la aceptación del ritmo natural de la vida y la transformación inesperada.",
     "modelo": "",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Planeta": "Júpiter" },
-      { "Elemento": "Fuego" },
-      { "Letra hebrea": "Kaf" },
-      { "Sendero del Árbol de la Vida": "4 al 7" },
-      { "Color": "Azul real" },
-      { "Arcángel": "Tzadkiel" },
-      { "Metal": "Estaño" },
-      { "Chakra": "Séptimo (Corona)" },
-      { "Estación": "Primavera" },
-      { "Valor simbólico": "Destino, karma y evolución" }
+      {
+        "Planeta": "Júpiter"
+      },
+      {
+        "Elemento": "Fuego"
+      },
+      {
+        "Letra hebrea": "Kaf"
+      },
+      {
+        "Sendero del Árbol de la Vida": "4 al 7"
+      },
+      {
+        "Color": "Azul real"
+      },
+      {
+        "Arcángel": "Tzadkiel"
+      },
+      {
+        "Metal": "Estaño"
+      },
+      {
+        "Chakra": "Séptimo (Corona)"
+      },
+      {
+        "Estación": "Primavera"
+      },
+      {
+        "Valor simbólico": "Destino, karma y evolución"
+      }
+    ],
+    "palabras_clave": [
+      "cambio",
+      "destino",
+      "ciclos"
     ]
   },
   {
     "numero": 11,
-    "nombre": "La Justicia",
-    "descripcion": "La Justicia representa el equilibrio, la verdad y la responsabilidad ética. Habla de la necesidad de tomar decisiones justas y de enfrentar las consecuencias con claridad y honestidad.",
+    "nombre": "La Fuerza",
+    "descripcion": "La Fuerza representa el coraje interior, la paciencia y el dominio de los impulsos. Habla de la suavidad que vence la dureza y del amor como poder transformador.",
     "modelo": "",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Planeta": "Venus" },
-      { "Elemento": "Aire" },
-      { "Letra hebrea": "Lamed" },
-      { "Sendero del Árbol de la Vida": "5 al 6" },
-      { "Color": "Verde esmeralda" },
-      { "Arcángel": "Anael" },
-      { "Metal": "Cobre" },
-      { "Chakra": "Cuarto (Corazón)" },
-      { "Estación": "Otoño" },
-      { "Valor simbólico": "Verdad, orden y juicio imparcial" }
+      {
+        "Planeta": "Sol"
+      },
+      {
+        "Elemento": "Fuego"
+      },
+      {
+        "Letra hebrea": "Tet"
+      },
+      {
+        "Sendero del Árbol de la Vida": "4 al 5"
+      },
+      {
+        "Color": "Dorado"
+      },
+      {
+        "Arcángel": "Mikael"
+      },
+      {
+        "Metal": "Oro"
+      },
+      {
+        "Chakra": "Tercer chakra (Plexo solar)"
+      },
+      {
+        "Estación": "Verano"
+      },
+      {
+        "Valor simbólico": "Valor, autocontrol y pasión sublimada"
+      }
+    ],
+    "palabras_clave": [
+      "fuerza",
+      "coraje",
+      "compasión"
     ]
   },
   {
@@ -232,18 +580,47 @@
     "nombre": "El Colgado",
     "descripcion": "El Colgado representa el sacrificio voluntario, la rendición y un cambio de perspectiva. Esta carta sugiere la importancia de soltar el control y confiar en el proceso para alcanzar una comprensión más profunda.",
     "modelo": "",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Planeta": "Neptuno" },
-      { "Elemento": "Agua" },
-      { "Letra hebrea": "Mem" },
-      { "Sendero del Árbol de la Vida": "5 al 8" },
-      { "Color": "Azul marino" },
-      { "Arcángel": "Asariel" },
-      { "Metal": "Plata" },
-      { "Chakra": "Séptimo (Corona)" },
-      { "Estación": "Invierno" },
-      { "Valor simbólico": "Rendición, iluminación y cambio de visión" }
+      {
+        "Planeta": "Neptuno"
+      },
+      {
+        "Elemento": "Agua"
+      },
+      {
+        "Letra hebrea": "Mem"
+      },
+      {
+        "Sendero del Árbol de la Vida": "5 al 8"
+      },
+      {
+        "Color": "Azul marino"
+      },
+      {
+        "Arcángel": "Asariel"
+      },
+      {
+        "Metal": "Plata"
+      },
+      {
+        "Chakra": "Séptimo (Corona)"
+      },
+      {
+        "Estación": "Invierno"
+      },
+      {
+        "Valor simbólico": "Rendición, iluminación y cambio de visión"
+      }
+    ],
+    "palabras_clave": [
+      "sacrificio",
+      "suspensión",
+      "perspectiva"
     ]
   },
   {
@@ -251,18 +628,47 @@
     "nombre": "La Muerte",
     "descripcion": "La Muerte no implica un final literal, sino una transformación profunda, el cierre de un ciclo y el renacimiento. Es una carta de renovación, liberación y evolución personal.",
     "modelo": "muerte",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Signo": "Escorpio" },
-      { "Elemento": "Agua" },
-      { "Planeta regente": "Plutón" },
-      { "Letra hebrea": "Nun" },
-      { "Sendero del Árbol de la Vida": "6 al 7" },
-      { "Color": "Negro" },
-      { "Arcángel": "Azrael" },
-      { "Metal": "Plomo" },
-      { "Chakra": "Octavo (Estrella del alma)" },
-      { "Valor simbólico": "Transformación, fin y renacimiento" }
+      {
+        "Signo": "Escorpio"
+      },
+      {
+        "Elemento": "Agua"
+      },
+      {
+        "Planeta regente": "Plutón"
+      },
+      {
+        "Letra hebrea": "Nun"
+      },
+      {
+        "Sendero del Árbol de la Vida": "6 al 7"
+      },
+      {
+        "Color": "Negro"
+      },
+      {
+        "Arcángel": "Azrael"
+      },
+      {
+        "Metal": "Plomo"
+      },
+      {
+        "Chakra": "Octavo (Estrella del alma)"
+      },
+      {
+        "Valor simbólico": "Transformación, fin y renacimiento"
+      }
+    ],
+    "palabras_clave": [
+      "transformación",
+      "fin",
+      "comienzo"
     ]
   },
   {
@@ -270,18 +676,47 @@
     "nombre": "La Templanza",
     "descripcion": "La Templanza simboliza la armonía, la moderación y el balance entre fuerzas opuestas. Nos enseña a fluir con paciencia y sabiduría, integrando distintos aspectos de la vida.",
     "modelo": "",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Signo": "Sagitario" },
-      { "Elemento": "Fuego" },
-      { "Planeta regente": "Júpiter" },
-      { "Letra hebrea": "Samekh" },
-      { "Sendero del Árbol de la Vida": "6 al 9" },
-      { "Color": "Púrpura" },
-      { "Arcángel": "Sachiel" },
-      { "Metal": "Estaño" },
-      { "Chakra": "Tercer (Plexo solar)" },
-      { "Valor simbólico": "Integración, sanación y alquimia espiritual" }
+      {
+        "Signo": "Sagitario"
+      },
+      {
+        "Elemento": "Fuego"
+      },
+      {
+        "Planeta regente": "Júpiter"
+      },
+      {
+        "Letra hebrea": "Samekh"
+      },
+      {
+        "Sendero del Árbol de la Vida": "6 al 9"
+      },
+      {
+        "Color": "Púrpura"
+      },
+      {
+        "Arcángel": "Sachiel"
+      },
+      {
+        "Metal": "Estaño"
+      },
+      {
+        "Chakra": "Tercer (Plexo solar)"
+      },
+      {
+        "Valor simbólico": "Integración, sanación y alquimia espiritual"
+      }
+    ],
+    "palabras_clave": [
+      "moderación",
+      "paciencia",
+      "equilibrio"
     ]
   },
   {
@@ -289,18 +724,47 @@
     "nombre": "El Diablo",
     "descripcion": "El Diablo representa las ataduras materiales, la sombra interior y las ilusiones que nos encadenan. Invita a tomar conciencia de los deseos ocultos y a liberarse del autoengaño.",
     "modelo": "",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Signo": "Capricornio" },
-      { "Elemento": "Tierra" },
-      { "Planeta regente": "Saturno" },
-      { "Letra hebrea": "Ayin" },
-      { "Sendero del Árbol de la Vida": "6 al 8" },
-      { "Color": "Negro" },
-      { "Arcángel": "Kamael" },
-      { "Metal": "Plomo" },
-      { "Chakra": "Primer (Raíz)" },
-      { "Valor simbólico": "Ataduras, deseos ocultos y poder interior" }
+      {
+        "Signo": "Capricornio"
+      },
+      {
+        "Elemento": "Tierra"
+      },
+      {
+        "Planeta regente": "Saturno"
+      },
+      {
+        "Letra hebrea": "Ayin"
+      },
+      {
+        "Sendero del Árbol de la Vida": "6 al 8"
+      },
+      {
+        "Color": "Negro"
+      },
+      {
+        "Arcángel": "Kamael"
+      },
+      {
+        "Metal": "Plomo"
+      },
+      {
+        "Chakra": "Primer (Raíz)"
+      },
+      {
+        "Valor simbólico": "Ataduras, deseos ocultos y poder interior"
+      }
+    ],
+    "palabras_clave": [
+      "tentación",
+      "materialismo",
+      "ataduras"
     ]
   },
   {
@@ -308,18 +772,47 @@
     "nombre": "La Torre",
     "descripcion": "La Torre simboliza la ruptura de estructuras obsoletas, la revelación repentina y la liberación de la ilusión. Aunque puede parecer destructiva, es una oportunidad para reconstruir con autenticidad.",
     "modelo": "torre",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Planeta": "Marte" },
-      { "Elemento": "Fuego" },
-      { "Letra hebrea": "Peh" },
-      { "Sendero del Árbol de la Vida": "7 al 8" },
-      { "Color": "Rojo escarlata" },
-      { "Arcángel": "Kamael" },
-      { "Metal": "Hierro" },
-      { "Chakra": "Segundo (Sacral)" },
-      { "Estación": "Invierno" },
-      { "Valor simbólico": "Caída, liberación y verdad revelada" }
+      {
+        "Planeta": "Marte"
+      },
+      {
+        "Elemento": "Fuego"
+      },
+      {
+        "Letra hebrea": "Peh"
+      },
+      {
+        "Sendero del Árbol de la Vida": "7 al 8"
+      },
+      {
+        "Color": "Rojo escarlata"
+      },
+      {
+        "Arcángel": "Kamael"
+      },
+      {
+        "Metal": "Hierro"
+      },
+      {
+        "Chakra": "Segundo (Sacral)"
+      },
+      {
+        "Estación": "Invierno"
+      },
+      {
+        "Valor simbólico": "Caída, liberación y verdad revelada"
+      }
+    ],
+    "palabras_clave": [
+      "destrucción",
+      "revelación",
+      "cambio"
     ]
   },
   {
@@ -327,18 +820,47 @@
     "nombre": "La Estrella",
     "descripcion": "La Estrella representa la esperanza, la fe y la inspiración divina. Esta carta es un faro de luz en momentos oscuros, recordándonos la conexión con lo trascendente y la posibilidad de renovación.",
     "modelo": "",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Signo": "Acuario" },
-      { "Elemento": "Aire" },
-      { "Planeta regente": "Urano" },
-      { "Letra hebrea": "He" },
-      { "Sendero del Árbol de la Vida": "7 al 9" },
-      { "Color": "Azul celeste" },
-      { "Arcángel": "Uriel" },
-      { "Metal": "Aluminio" },
-      { "Chakra": "Quinto (Garganta)" },
-      { "Valor simbólico": "Esperanza, guía y purificación espiritual" }
+      {
+        "Signo": "Acuario"
+      },
+      {
+        "Elemento": "Aire"
+      },
+      {
+        "Planeta regente": "Urano"
+      },
+      {
+        "Letra hebrea": "He"
+      },
+      {
+        "Sendero del Árbol de la Vida": "7 al 9"
+      },
+      {
+        "Color": "Azul celeste"
+      },
+      {
+        "Arcángel": "Uriel"
+      },
+      {
+        "Metal": "Aluminio"
+      },
+      {
+        "Chakra": "Quinto (Garganta)"
+      },
+      {
+        "Valor simbólico": "Esperanza, guía y purificación espiritual"
+      }
+    ],
+    "palabras_clave": [
+      "esperanza",
+      "inspiración",
+      "serenidad"
     ]
   },
   {
@@ -346,18 +868,47 @@
     "nombre": "La Luna",
     "descripcion": "La Luna simboliza los ciclos ocultos, los sueños, la intuición y las ilusiones. Nos invita a explorar el inconsciente y a atravesar el velo que separa lo visible de lo invisible.",
     "modelo": "",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Signo": "Piscis" },
-      { "Elemento": "Agua" },
-      { "Planeta regente": "Neptuno" },
-      { "Letra hebrea": "Qoph" },
-      { "Sendero del Árbol de la Vida": "9 al 10" },
-      { "Color": "Plateado" },
-      { "Arcángel": "Gabriel" },
-      { "Metal": "Plata" },
-      { "Chakra": "Sexto (Tercer ojo)" },
-      { "Valor simbólico": "Intuición, misterio y mundo onírico" }
+      {
+        "Signo": "Piscis"
+      },
+      {
+        "Elemento": "Agua"
+      },
+      {
+        "Planeta regente": "Neptuno"
+      },
+      {
+        "Letra hebrea": "Qoph"
+      },
+      {
+        "Sendero del Árbol de la Vida": "9 al 10"
+      },
+      {
+        "Color": "Plateado"
+      },
+      {
+        "Arcángel": "Gabriel"
+      },
+      {
+        "Metal": "Plata"
+      },
+      {
+        "Chakra": "Sexto (Tercer ojo)"
+      },
+      {
+        "Valor simbólico": "Intuición, misterio y mundo onírico"
+      }
+    ],
+    "palabras_clave": [
+      "ilusión",
+      "subconsciente",
+      "sueños"
     ]
   },
   {
@@ -365,18 +916,47 @@
     "nombre": "El Sol",
     "descripcion": "El Sol irradia claridad, éxito, vitalidad y alegría. Esta carta celebra el triunfo de la verdad, la energía de la infancia interior y la unión con la luz de la conciencia.",
     "modelo": "",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Astro": "Sol" },
-      { "Elemento": "Fuego" },
-      { "Letra hebrea": "Resh" },
-      { "Sendero del Árbol de la Vida": "8 al 9" },
-      { "Color": "Dorado" },
-      { "Arcángel": "Mikael" },
-      { "Metal": "Oro" },
-      { "Chakra": "Tercer (Plexo solar)" },
-      { "Estación": "Verano" },
-      { "Valor simbólico": "Éxito, iluminación y alegría vital" }
+      {
+        "Astro": "Sol"
+      },
+      {
+        "Elemento": "Fuego"
+      },
+      {
+        "Letra hebrea": "Resh"
+      },
+      {
+        "Sendero del Árbol de la Vida": "8 al 9"
+      },
+      {
+        "Color": "Dorado"
+      },
+      {
+        "Arcángel": "Mikael"
+      },
+      {
+        "Metal": "Oro"
+      },
+      {
+        "Chakra": "Tercer (Plexo solar)"
+      },
+      {
+        "Estación": "Verano"
+      },
+      {
+        "Valor simbólico": "Éxito, iluminación y alegría vital"
+      }
+    ],
+    "palabras_clave": [
+      "felicidad",
+      "éxito",
+      "vitalidad"
     ]
   },
   {
@@ -384,18 +964,47 @@
     "nombre": "El Juicio",
     "descripcion": "El Juicio anuncia un despertar, una evaluación profunda del alma y el llamado a cumplir un propósito más elevado. Marca un renacimiento y la revelación de la verdad interna.",
     "modelo": "juicio",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Planeta": "Plutón" },
-      { "Elemento": "Fuego" },
-      { "Letra hebrea": "Shin" },
-      { "Sendero del Árbol de la Vida": "8 al 10" },
-      { "Color": "Rojo fuego" },
-      { "Arcángel": "Gabriel" },
-      { "Metal": "Plomo" },
-      { "Chakra": "Séptimo (Corona)" },
-      { "Valor simbólico": "Renacimiento, llamado interno y redención" },
-      { "Número cabalístico": "20 (2 + 0 = 2, vinculado a la Sacerdotisa)" }
+      {
+        "Planeta": "Plutón"
+      },
+      {
+        "Elemento": "Fuego"
+      },
+      {
+        "Letra hebrea": "Shin"
+      },
+      {
+        "Sendero del Árbol de la Vida": "8 al 10"
+      },
+      {
+        "Color": "Rojo fuego"
+      },
+      {
+        "Arcángel": "Gabriel"
+      },
+      {
+        "Metal": "Plomo"
+      },
+      {
+        "Chakra": "Séptimo (Corona)"
+      },
+      {
+        "Valor simbólico": "Renacimiento, llamado interno y redención"
+      },
+      {
+        "Número cabalístico": "20 (2 + 0 = 2, vinculado a la Sacerdotisa)"
+      }
+    ],
+    "palabras_clave": [
+      "juicio",
+      "renovación",
+      "liberación"
     ]
   },
   {
@@ -403,18 +1012,47 @@
     "nombre": "El Mundo",
     "descripcion": "El Mundo representa la culminación, la plenitud y la integración de todos los aspectos del ser. Esta carta sugiere la realización del viaje espiritual y la unión con el todo.",
     "modelo": "",
-    "decks": ["Rider-Waite", "Thoth", "Marseille"],
+    "decks": [
+      "Rider-Waite",
+      "Thoth",
+      "Marseille"
+    ],
     "correspondencias": [
-      { "Planeta": "Saturno" },
-      { "Elemento": "Tierra" },
-      { "Letra hebrea": "Tav" },
-      { "Sendero del Árbol de la Vida": "9 al 10" },
-      { "Color": "Verde esmeralda" },
-      { "Arcángel": "Kassiel" },
-      { "Metal": "Plomo" },
-      { "Chakra": "Todos (integración total)" },
-      { "Estación": "Todas (ciclo completo)" },
-      { "Valor simbólico": "Plenitud, final de un ciclo y unión con lo divino" }
+      {
+        "Planeta": "Saturno"
+      },
+      {
+        "Elemento": "Tierra"
+      },
+      {
+        "Letra hebrea": "Tav"
+      },
+      {
+        "Sendero del Árbol de la Vida": "9 al 10"
+      },
+      {
+        "Color": "Verde esmeralda"
+      },
+      {
+        "Arcángel": "Kassiel"
+      },
+      {
+        "Metal": "Plomo"
+      },
+      {
+        "Chakra": "Todos (integración total)"
+      },
+      {
+        "Estación": "Todas (ciclo completo)"
+      },
+      {
+        "Valor simbólico": "Plenitud, final de un ciclo y unión con lo divino"
+      }
+    ],
+    "palabras_clave": [
+      "culminación",
+      "realización",
+      "integración"
     ]
   }
 ]

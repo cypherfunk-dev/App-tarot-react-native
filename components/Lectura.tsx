@@ -1,45 +1,38 @@
-import React, { useContext } from "react";
+import React from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
 import { BlurView } from "expo-blur";
 import PagerView from "react-native-pager-view";
-import config from "../assets/data/data.json";
-import { ApplicationContext } from "../app/(tabs)/_layout";
-import { images } from "../assets/data/images.js";
+import { useAppStore } from "../stores/appStore";
+import { getArcano } from "../data/arcanos";
 
-const loadConfigFromAssets = () => {
-  JSON.stringify(config);
-  return config;
-};
+const coloresPagina = ["#7a89c2", "#e3d7ff", "#636b61"];
 
 const Lectura = () => {
-  const context = useContext(ApplicationContext);
-  if (!context) {
-    throw new Error("ApplicationContext no está disponible.");
-  }
-  const { isResultado } = context;
-  loadConfigFromAssets();
-  // filtra en base a el resultado
-  const image = images.filter((_, index) => isResultado.includes(index));
-  image[3] = image[0];
-  image[0] = image[2];
-  image[2] = image[3];
-  image.pop();
+  const isResultado = useAppStore((s) => s.isResultado);
+  // Muestra las cartas en el mismo orden en que fueron seleccionadas
+  const cartas = isResultado.map((numero) => getArcano(numero));
+
   return (
     <PagerView
       style={styles.container}
       initialPage={0}
       orientation={"horizontal"}
     >
-      {image.map((item, index) => (
-        <View key={index + 1} style={styles[`page${index + 1}`]}>
-          <Text style={styles.Tittle}>{item.nombre}</Text>
-          <Image source={item.image} style={styles.image} />
+      {cartas.map((arcano, index) => (
+        <View
+          key={arcano.numero}
+          style={[
+            styles.page,
+            { backgroundColor: coloresPagina[index % coloresPagina.length] },
+          ]}
+        >
+          <Text style={styles.titulo}>{arcano.nombre}</Text>
+          <Image source={arcano.miniatura} style={styles.image} />
           <BlurView intensity={100} style={styles.cuadrotexto}>
-            <Text style={styles.text}>{item.descripcion}</Text>
+            <Text style={styles.text}>{arcano.descripcion}</Text>
           </BlurView>
         </View>
       ))}
-
     </PagerView>
   );
 };
@@ -48,26 +41,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  page1: {
+  page: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#7a89c2",
   },
-  page2: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#e3d7ff",
-  },
-  page3: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#636b61",
-  },
-  Tittle: {
+  titulo: {
     fontSize: 42,
   },
   text: {
     fontSize: 18,
+    padding: 16,
+    textAlign: "center",
   },
   image: {
     height: 400,
@@ -77,7 +61,6 @@ const styles = StyleSheet.create({
   cuadrotexto: {
     width: 400,
     height: 250,
-
     borderRadius: 10,
     backgroundColor: "rgba(255, 255, 255, 0.5)",
     bottom: 0,

@@ -1,12 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import data from "../../data/arcanes.json";
+import { getArcano } from "../../data/arcanos";
+
 interface CorrespondenciasProps {
-  arcane: any; // Replace 'any' with the appropriate type if known
+  arcane: number;
 }
 
 const Correspondencias: React.FC<CorrespondenciasProps> = ({ arcane }) => {
-  const arcaneinfo = data[arcane].correspondencias;
+  const arcaneinfo = getArcano(arcane).correspondencias;
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.table}>
@@ -18,7 +19,7 @@ const Correspondencias: React.FC<CorrespondenciasProps> = ({ arcane }) => {
           const value = info[key];
           return (
             <View
-              key={index}
+              key={key}
               style={[
                 styles.tableRow,
                 index % 2 === 0 ? styles.tableRowEven : styles.tableRowOdd,

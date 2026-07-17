@@ -1,9 +1,11 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { GiftedChat } from "react-native-gifted-chat";
+import React, { useState, useCallback } from "react";
+import { GiftedChat, IMessage } from "react-native-gifted-chat";
 import axios from "axios";
 
+const N8N_CHAT_URL = process.env.EXPO_PUBLIC_N8N_CHAT_URL;
+
 const Chatscreen = () => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<IMessage[]>([]);
 
   // useEffect(() => {
   //   // Mensaje de bienvenida inicial
@@ -20,7 +22,7 @@ const Chatscreen = () => {
   //   ]);
   // }, []);
 
-  const onSend = useCallback(async (newMessages = []) => {
+  const onSend = useCallback(async (newMessages: IMessage[] = []) => {
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, newMessages),
     );
@@ -30,8 +32,11 @@ const Chatscreen = () => {
 
     // Enviar el mensaje al backend de n8n
     try {
+      if (!N8N_CHAT_URL) {
+        throw new Error("EXPO_PUBLIC_N8N_CHAT_URL no está configurada");
+      }
       const response = await axios.post(
-        "https://n8n.cypherfunk.tech/webhook/cefbc292-9b55-4527-9aaa-9ece1ff713c7/chat",
+        N8N_CHAT_URL,
         {
           chatInput: userMessage,
         },
@@ -60,6 +65,19 @@ const Chatscreen = () => {
       );
     } catch (error) {
       console.error("Error sending message:", error);
+      setMessages((previousMessages) =>
+        GiftedChat.append(previousMessages, [
+          {
+            _id: Math.random().toString(),
+            text: "El arcano medita en silencio... (no se pudo obtener respuesta, intenta de nuevo)",
+            createdAt: new Date(),
+            user: {
+              _id: 2,
+              name: "Nathan",
+            },
+          },
+        ])
+      );
     }
   }, []);
 

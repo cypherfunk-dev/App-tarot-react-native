@@ -1,16 +1,19 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CardBack from "../assets/images/miniaturas/back.jpg";
 import { Image } from "expo-image";
+
+const CardBack = require("../assets/images/miniaturas/back.jpg");
 import { View, StyleSheet, Pressable, Text, Dimensions } from "react-native";
 import Animated, {
-  useSharedValue,
   useAnimatedStyle,
   withTiming,
+  makeMutable,
+  SharedValue,
 } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
 import FlipCard from "react-native-flip-card";
-import { ApplicationContext } from "../app/(tabs)/_layout";
+import { useAppStore } from "../stores/appStore";
+import { usePlayerStore } from "../stores/playerStore";
 
 const images = [
   { indice: 0, ruta: require("../assets/images/miniaturas/0.jpg") },
@@ -39,41 +42,109 @@ const images = [
 
 const { width, height } = Dimensions.get("window");
 
+const TOTAL_CARDS = images.length;
+
+type CardAnim = {
+  translateX: SharedValue<number>;
+  translateY: SharedValue<number>;
+  rotation: SharedValue<number>;
+  zIndex: SharedValue<number>;
+};
+
+// Crea los valores animados una sola vez, fuera del render-loop, para no
+// llamar hooks dentro de un .map() (Reglas de Hooks).
+const createCards = (): CardAnim[] =>
+  new Array(TOTAL_CARDS).fill(null).map(() => ({
+    translateX: makeMutable(0),
+    translateY: makeMutable(0),
+    rotation: makeMutable(0),
+    zIndex: makeMutable(0),
+  }));
+
+type TarotCardProps = {
+  card: CardAnim;
+  index: number;
+  frontSource: number;
+  borderStyle: object;
+  isFlipped: boolean;
+  onPress: () => void;
+};
+
+// Cada carta es su propio componente: así su useAnimatedStyle vive en el
+// nivel superior de un componente, no dentro de un bucle.
+const TarotCard = ({
+  card,
+  index,
+  frontSource,
+  borderStyle,
+  isFlipped,
+  onPress,
+}: TarotCardProps) => {
+  const animatedCardStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: card.translateX.value + index * -1.1 },
+      { translateY: card.translateY.value + index * 1.05 },
+    ],
+    zIndex: card.zIndex.value,
+  }));
+
+  return (
+    <Animated.View style={[styles.card, animatedCardStyle]}>
+      <FlipCard
+        style={[styles.card]}
+        friction={8}
+        perspective={150}
+        flipHorizontal={true}
+        flipVertical={false}
+        flip={isFlipped}
+        clickable={false}
+      >
+        <Pressable onPress={onPress}>
+          <Image
+            source={CardBack}
+            contentFit="cover"
+            style={[styles.image, borderStyle]}
+          />
+        </Pressable>
+        <Pressable onPress={onPress}>
+          <Image
+            source={frontSource}
+            contentFit="cover"
+            style={[styles.image, borderStyle]}
+          />
+        </Pressable>
+      </FlipCard>
+    </Animated.View>
+  );
+};
+
 const TiradaSeleccion = () => {
   const [selectedCards, setSelectedCards] = useState<boolean[]>(
-    new Array(22).fill(false)
+    new Array(TOTAL_CARDS).fill(false)
   );
-  const [cardStyle, setCardStyle] = useState<any[]>(
-    new Array(22).fill({ borderWidth: 0 })
+  const [cardStyle, setCardStyle] = useState<object[]>(
+    new Array(TOTAL_CARDS).fill({ borderWidth: 0 })
   );
-  const [isCount, setIsCount] = useState(0);
+  const [selectedOrder, setSelectedOrder] = useState<number[]>([]);
   const [isButtonEnabled, setIsButtonEnabled] = useState(true);
   const [isShuffling, setIsShuffling] = useState(false);
   const [isOver, setIsOver] = useState(false);
-  const [isButtonActiveStyle, setIsButtonActiveStyle] = useState<any[]>([
-    "#4c669f",
-    "#3b5998",
-    "#1a3f69",
-  ]);
+  const [isButtonActiveStyle, setIsButtonActiveStyle] = useState<
+    [string, string, string]
+  >(["#4c669f", "#3b5998", "#1a3f69"]);
   const [isFlipped, setIsFlipped] = useState(false);
   const [isMoving, setIsMoving] = useState(false);
-  // Inicializacion de las cartas
-  const cards = new Array(22).fill(null).map((_, index) => ({
-    translateY: useSharedValue(0),
-    translateX: useSharedValue(0),
-    rotation: useSharedValue(0),
-    zIndex: useSharedValue(0),
-    arcaneNumber: images[index].indice,
-  }));
-  // Inicializacion de contexto
-  const context = useContext(ApplicationContext);
 
-  if (!context) {
-    throw new Error("ApplicationContext no está disponible.");
+  // Valores animados de las 22 cartas, creados una sola vez.
+  const cardsRef = useRef<CardAnim[] | null>(null);
+  if (cardsRef.current === null) {
+    cardsRef.current = createCards();
   }
+  const cards = cardsRef.current;
 
-  const { isLectura, setIsLectura } = context;
-  const { isResultado, setIsResultado } = context;
+  const setIsLectura = useAppStore((s) => s.setIsLectura);
+  const setIsResultado = useAppStore((s) => s.setIsResultado);
+  const registrarTirada = usePlayerStore((s) => s.registrarTirada);
 
   const shuffleCards = async () => {
     if (isShuffling) return;
@@ -84,7 +155,7 @@ const TiradaSeleccion = () => {
     const wait = (ms: number) =>
       new Promise((resolve) => setTimeout(resolve, ms));
     // Paso 1: Mezcla inicial aleatoria de las cartas en X e Y
-    cards.forEach((card, index) => {
+    cards.forEach((card) => {
       const randomX = Math.random() * 200 - 100; // Movimiento aleatorio en X
       const randomY = Math.random() * 200 - 100; // Movimiento aleatorio en Y
       const randomRotation = Math.random() * 360; // Rotación aleatoria para más variabilidad
@@ -165,14 +236,13 @@ const TiradaSeleccion = () => {
       setIsShuffling(false);
     }, 3000);
   };
+
   const deselectAllCards = () => {
-    setSelectedCards(new Array(selectedCards.length).fill(false));
-    setIsCount(0);
-    setCardStyle(new Array(cardStyle.length).fill({ borderWidth: 0 }));
+    setSelectedCards(new Array(TOTAL_CARDS).fill(false));
+    setSelectedOrder([]);
+    setCardStyle(new Array(TOTAL_CARDS).fill({ borderWidth: 0 }));
   };
-  const toggleFlip = (result: number[]) => {
-    setIsFlipped(!isFlipped);
-  };
+
   const revealCards = async () => {
     // Elevar cartas no seleccionadas
     cards.forEach((card, index) => {
@@ -182,173 +252,105 @@ const TiradaSeleccion = () => {
         });
       }
     });
-    let result: number[] = [];
-    images.forEach((_, index) => {
-      if (selectedCards[index] === true) {
-        result.push(images[index].indice);
-      }
-    });
-    //Se modifica el orden de las cartas seleccionadas, debido a que se obtienen invertidas, finalmente el ultimo elemento del array que sirve de memoria
-    result[3] = result[0];
-    result[0] = result[2];
-    result[2] = result[3];
-    result.pop();
+    // El resultado conserva el orden en que el usuario seleccionó las cartas
+    const result = selectedOrder.map((pos) => images[pos].indice);
     setIsResultado(result);
+    registrarTirada(result); // XP, racha y vínculos (ver playerStore)
+    setIsFlipped(true);
+
     const baseX = 130; // Punto inicial en X
     const spacing = 120; // Espaciado entre las cartas
     const revealY = 50; // Posición fija en Y
-    // !!!!IA GENERATED SOLUTION
-    // Iterar sobre el estado selectedCards para preservar el orden de selección
-    let selectedIndex = 0;
-    selectedCards.forEach((isSelected, index) => {
-      if (isSelected) {
-        const card = cards[index]; // Asegurar que usamos la carta correcta
-        const targetX = baseX + selectedIndex * spacing; // Calcular la posición X
-        setTimeout(() => {
-          card.translateX.value = withTiming(targetX, { duration: 500 }); // Movimiento en X
-          card.translateY.value = withTiming(revealY, { duration: 500 }); // Movimiento en Y
-        }, 1500);
-        selectedIndex--; // Decrecentar índice para la próxima carta seleccionada
-        toggleFlip(result);
-      }
+
+    // Desplegar las cartas seleccionadas en abanico, en orden de selección
+    selectedOrder.forEach((pos, selectedIndex) => {
+      const card = cards[pos];
+      const targetX = baseX + selectedIndex * spacing;
+      setTimeout(() => {
+        card.translateX.value = withTiming(targetX, { duration: 500 });
+        card.translateY.value = withTiming(revealY, { duration: 500 });
+      }, 1500);
     });
 
-    setTimeout(() => {
-      let count = 0;
-      selectedCards.forEach((isSelected, index) => {
-        if (isSelected) {
-          const card = cards[index];
-
-          // Establecer posiciones específicas para cada carta
-          let x = 0; // Posición X por defecto
-          let y = 0; // Posición Y por defecto
-          if (count === 0) {
-            // Primera carta hacia la izquierda
-            x = 800; // Mover a la izquierda
-            y = 0;
-            count++;
-          } else if (count === 1) {
-            // Segunda carta hacia arriba
-            x = 0;
-            y = -800; // Mover hacia arriba
-            count++;
-          } else if (count === 2) {
-            // Tercera carta hacia la derecha
-            x = -800; // Mover a la derecha
-            y = 0;
-            count++;
-          }
-          // Movimiento suave de las cartas
-          card.translateX.value = withTiming(x, { duration: 500 });
-          card.translateY.value = withTiming(y, { duration: 500 });
-          card.zIndex.value = 0; // Asegura que el orden visual sea correcto
-        }
-      });
-    }, 5000);
     setIsOver(true);
+  };
+
+  const handleSelect = (index: number) => {
+    if (isMoving) return;
+    setIsMoving(true);
+    const card = cards[index];
+    if (selectedOrder.length < 3 && !selectedCards[index]) {
+      setSelectedCards((prev) => {
+        const newSelectedCards = [...prev];
+        newSelectedCards[index] = true;
+        return newSelectedCards;
+      });
+      setSelectedOrder((prev) => [...prev, index]);
+      card.translateY.value = withTiming(card.translateY.value - 100, {
+        duration: 500,
+      });
+      setCardStyle((prev) => {
+        const newCardStyles = [...prev];
+        newCardStyles[index] = {
+          borderColor: "blue",
+          borderWidth: 3,
+        };
+        return newCardStyles;
+      });
+    } else if (selectedCards[index]) {
+      setSelectedCards((prev) => {
+        const newSelectedCards = [...prev];
+        newSelectedCards[index] = false;
+        return newSelectedCards;
+      });
+      setSelectedOrder((prev) => prev.filter((i) => i !== index));
+      card.translateY.value = withTiming(card.translateY.value + 100, {
+        duration: 500,
+      });
+      setCardStyle((prev) => {
+        const newCardStyles = [...prev];
+        newCardStyles[index] = { borderWidth: 0 };
+        return newCardStyles;
+      });
+    }
+    setTimeout(() => {
+      setIsMoving(false);
+    }, 500);
   };
 
   // boton cambia de comportamiento al seleccionar 3 cartas
   useEffect(() => {
-    if (isCount === 3) {
+    if (selectedOrder.length === 3) {
       setIsButtonEnabled(true);
       setIsButtonActiveStyle(["#4c669f", "#3b5998", "#1a3f69"]);
     } else {
       setIsButtonEnabled(false);
       setIsButtonActiveStyle(["#808080", "#949494", "#647C90"]);
     }
-  }, [isCount]);
+  }, [selectedOrder]);
   // Delay para mostrar la lectura
   useEffect(() => {
     if (isOver) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setIsLectura(true);
       }, 5000);
+      return () => clearTimeout(timer);
     }
-  }, [isOver]);
+  }, [isOver, setIsLectura]);
 
   return (
     <SafeAreaView style={styles.container}>
-      {cards.map((card, index) => {
-        const selectCardHandler = () => {
-          if (isMoving) return;
-          setIsMoving(true);
-          if (isCount < 3 && !selectedCards[index]) {
-            setSelectedCards((prev) => {
-              const newSelectedCards = [...prev];
-              newSelectedCards[index] = true;
-              return newSelectedCards;
-            });
-            setIsCount(isCount + 1);
-            card.translateY.value = withTiming(card.translateY.value - 100, {
-              duration: 500,
-            });
-            setCardStyle((prev) => {
-              const newCardStyles = [...prev];
-              newCardStyles[index] = {
-                borderColor: "blue",
-                borderWidth: 3,
-              };
-              return newCardStyles;
-            });
-          } else if (selectedCards[index]) {
-            setSelectedCards((prev) => {
-              const newSelectedCards = [...prev];
-              newSelectedCards[index] = false;
-              return newSelectedCards;
-            });
-            setIsCount(isCount - 1);
-            card.translateY.value = withTiming(card.translateY.value + 100, {
-              duration: 500,
-            });
-            setCardStyle((prev) => {
-              const newCardStyles = [...prev];
-              newCardStyles[index] = { borderWidth: 0 };
-              return newCardStyles;
-            });
-          }
-          setTimeout(() => {
-            setIsMoving(false);
-          }, 500);
-        };
-
-        const animatedCardStyle = useAnimatedStyle(() => ({
-          transform: [
-            { translateX: card.translateX.value + index * -1.1 },
-            { translateY: card.translateY.value + index * 1.05 },
-          ],
-          zIndex: card.zIndex.value,
-        }));
-
-        return (
-          <Animated.View key={index} style={[styles.card, animatedCardStyle]}>
-            <FlipCard
-              style={[styles.card]}
-              friction={8}
-              perspective={150}
-              flipHorizontal={true}
-              flipVertical={false}
-              flip={isFlipped}
-              clickable={false}
-            >
-              <Pressable onPress={selectCardHandler}>
-                <Image
-                  source={CardBack}
-                  contentFit="cover"
-                  style={[styles.image, cardStyle[index]]}
-                />
-              </Pressable>
-              <Pressable onPress={selectCardHandler}>
-                <Image
-                  source={images[index].ruta}
-                  contentFit="cover"
-                  style={[styles.image, cardStyle[index]]}
-                />
-              </Pressable>
-            </FlipCard>
-          </Animated.View>
-        );
-      })}
+      {cards.map((card, index) => (
+        <TarotCard
+          key={index}
+          card={card}
+          index={index}
+          frontSource={images[index].ruta}
+          borderStyle={cardStyle[index]}
+          isFlipped={isFlipped}
+          onPress={() => handleSelect(index)}
+        />
+      ))}
       <View style={styles.containerboton}>
         <Pressable
           style={[isOver ? styles.buttonOut : styles.button]}

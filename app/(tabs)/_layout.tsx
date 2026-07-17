@@ -1,32 +1,13 @@
 import { Tabs } from "expo-router";
-import { createContext, useState, useMemo } from "react";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
 
-export const ApplicationContext = createContext<
-  | {
-      isLectura: boolean;
-      setIsLectura: React.Dispatch<React.SetStateAction<boolean>>;
-      isResultado: number[];
-      setIsResultado: React.Dispatch<React.SetStateAction<number[]>>;
-    }
-  | undefined
->(undefined);
-
 const TabLayout = () => {
-  const [isLectura, setIsLectura] = useState(false);
-  const [isResultado, setIsResultado] = useState<number[]>([]);
   const colorScheme = useColorScheme();
 
-  const contextValue = useMemo(
-    () => ({ isLectura, setIsLectura, isResultado, setIsResultado }),
-    [isLectura, setIsLectura, isResultado, setIsResultado],
-  );
-
   return (
-    <ApplicationContext.Provider value={contextValue}>
-      <Tabs
+    <Tabs
         screenOptions={{
           tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
           headerShown: false,
@@ -80,8 +61,7 @@ const TabLayout = () => {
             ),
           }}
         />
-      </Tabs>
-    </ApplicationContext.Provider>
+    </Tabs>
   );
 };
 

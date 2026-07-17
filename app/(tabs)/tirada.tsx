@@ -1,22 +1,12 @@
-import React, { useContext } from "react";
-import { ApplicationContext } from "../../app/(tabs)/_layout";
+import React from "react";
+import { useAppStore } from "../../stores/appStore";
 import Lectura from "../../components/Lectura";
 import TiradaSeleccion from "../../components/TiradaSeleccion";
 
 const Tirada = () => {
-  const context = useContext(ApplicationContext);
+  const isLectura = useAppStore((s) => s.isLectura);
 
-  if (!context) {
-    throw new Error("ApplicationContext no está disponible.");
-  }
-
-  const { isLectura } = context;
-
-  if (isLectura) {
-    return <Lectura />;
-  } else {
-    return <TiradaSeleccion />;
-  }
+  return isLectura ? <Lectura /> : <TiradaSeleccion />;
 };
 
 export default Tirada;

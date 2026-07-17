@@ -7,7 +7,7 @@
     "icon": "./assets/images/icon.png",
     "scheme": "arcania",
     "userInterfaceStyle": "automatic",
-     "newArchEnabled": true,
+    "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -30,7 +30,10 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      "expo-font",
+      "expo-image",
+      "expo-status-bar",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true
